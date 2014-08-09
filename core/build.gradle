@@ -1,0 +1,32 @@
+sourceCompatibility = 1.7
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+    }
+}
+
+import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
+class TextureSetupTask extends DefaultTask {
+    String from
+    String to
+    String packName = "textures.pack"
+
+    @TaskAction
+    def pack() {
+        TexturePacker2.process(from, to, packName)
+    }
+}
+
+task compressTextures(type: TextureSetupTask) {
+    from = "android/assets/images"
+    to = "android/assets/gen"
+}
+processResources.dependsOn compressTextures
+
+eclipse.project {
+    name = appName
+}
