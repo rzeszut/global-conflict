@@ -22,7 +22,7 @@ class TextureSetupTask extends DefaultTask {
 }
 
 task compressTextures(type: TextureSetupTask) {
-    from = "android/assets/images"
+    from = "android/assets/image"
     to = "android/assets/gen"
 }
 processResources.dependsOn compressTextures
