@@ -1,4 +1,4 @@
-package globalconflict.screen;
+package edu.globalconflict.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,9 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import globalconflict.Assets;
-import globalconflict.Constants;
-import globalconflict.TheGame;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import edu.globalconflict.Assets;
+import edu.globalconflict.Constants;
+import edu.globalconflict.TheGame;
 
 /**
  * @author mateusz
@@ -35,12 +36,12 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.setViewport(width, height, true);
+        stage.getViewport().setWorldSize(width, height);
     }
 
     @Override
     public void show() {
-        stage = new Stage(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, true);
+        stage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         // widgets

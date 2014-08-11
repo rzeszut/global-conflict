@@ -1,4 +1,4 @@
-package globalconflict.util;
+package edu.globalconflict.util;
 
 import com.badlogic.gdx.math.Rectangle;
 

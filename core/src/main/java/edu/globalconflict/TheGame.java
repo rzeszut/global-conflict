@@ -1,9 +1,9 @@
 
-package globalconflict;
+package edu.globalconflict;
 
 import com.badlogic.gdx.Game;
-import globalconflict.screen.GameScreen;
-import globalconflict.screen.MainMenuScreen;
+import edu.globalconflict.screen.GameScreen;
+import edu.globalconflict.screen.MainMenuScreen;
 
 public class TheGame extends Game {
     public MainMenuScreen mainMenuScreen;

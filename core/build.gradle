@@ -5,28 +5,34 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
     }
 }
 
-import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
-class TextureSetupTask extends DefaultTask {
-    String from
-    String to
-    String packName = "textures.pack"
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+
+import com.badlogic.gdx.tools.imagepacker.ImagePacker
+class ImageAtlasCreateTask extends DefaultTask {
+    def from
+    def to
+    def packName
+    def images
 
     @TaskAction
     def pack() {
-        TexturePacker2.process(from, to, packName)
+        def packer = new ImagePacker()
     }
 }
 
-task compressTextures(type: TextureSetupTask) {
-    from = "android/assets/image"
-    to = "android/assets/gen"
-}
-processResources.dependsOn compressTextures
+//task generateAmericaAtlas(type: TextureSetupTask) {
+//    from = "android/assets/image/america"
+//    to = "android/assets/image/gen"
+//    packName = "america.atlas"
+//}
+//processResources.dependsOn generateAmericaAtlas
 
 eclipse.project {
-    name = appName
+    name = appName + "-core"
 }

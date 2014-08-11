@@ -1,5 +1,5 @@
 
-package globalconflict;
+package edu.globalconflict;
 
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -13,7 +13,6 @@ public class MainActivity extends AndroidApplication {
         final AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
-        config.useGL20 = true;
 
         initialize(new TheGame(), config);
     }
