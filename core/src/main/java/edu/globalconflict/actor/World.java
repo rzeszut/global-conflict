@@ -1,14 +1,12 @@
 package edu.globalconflict.actor;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Array;
-import edu.globalconflict.Assets;
+import edu.globalconflict.GameAssets;
 import edu.globalconflict.Constants;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  * @author mateusz
@@ -22,32 +20,51 @@ public class World extends Group {
     }
 
     private void constructAmerica() {
-        final Territory alaska = newTerritory(Assets.america, "alaska");
+        final Territory alaska = newTerritory(GameAssets.alaska);
+        alaska.name = "Alaska";
         setTerritoryPosition(alaska, 0, 106);
 
-        final Territory northwestTerritory = newTerritory(Assets.america, "northwest-territory");
+        final Territory northwestTerritory = newTerritory(GameAssets.northwestTerritory);
+        northwestTerritory.name = "Northwest Territory";
         setTerritoryPosition(northwestTerritory, 232, 48);
 
-        final Territory alberta = newTerritory(Assets.america, "alberta");
+        final Territory alberta = newTerritory(GameAssets.alberta);
+        alberta.name = "Alberta";
         setTerritoryPosition(alberta, 239, 171);
 
-        final Territory ontario = newTerritory(Assets.america, "ontario");
+        final Territory ontario = newTerritory(GameAssets.ontario);
+        ontario.name = "Ontario";
         setTerritoryPosition(ontario, 466, 247);
 
-        final Territory quebec = newTerritory(Assets.america, "quebec");
+        final Territory quebec = newTerritory(GameAssets.quebec);
+        quebec.name = "Quebec";
         setTerritoryPosition(quebec, 656, 231);
 
-        final Territory easternUS = newTerritory(Assets.america, "eastern-us");
+        final Territory easternUS = newTerritory(GameAssets.easternUS);
+        easternUS.name = "Eastern United States";
         setTerritoryPosition(easternUS, 311, 439);
 
-        final Territory westernUS = newTerritory(Assets.america, "western-us");
+        final Territory westernUS = newTerritory(GameAssets.westernUS);
+        westernUS.name = "Western United States";
         setTerritoryPosition(westernUS, 181, 372);
 
-        final Territory centralAmerica = newTerritory(Assets.america, "central-america");
+        final Territory centralAmerica = newTerritory(GameAssets.centralAmerica);
+        centralAmerica.name = "Central America";
         setTerritoryPosition(centralAmerica, 211, 642);
 
-        final Territory greenland = newTerritory(Assets.america, "greenland");
+        final Territory greenland = newTerritory(GameAssets.greenland);
+        greenland.name = "Greenland";
         setTerritoryPosition(greenland, 933, 0);
+    }
+
+    private Territory newTerritory(TextureRegion region) {
+        final Territory territory = new Territory();
+        territory.texture = region;
+        territory.setWidth(region.getRegionWidth());
+        territory.setHeight(region.getRegionHeight());
+
+        addActor(territory);
+        return territory;
     }
 
     private static void setTerritoryBounds(Territory territory, float... indices) {
@@ -65,20 +82,8 @@ public class World extends Group {
         territory.polygonBounds = bounds;
     }
 
-    private Territory newTerritory(TextureAtlas atlas, String name) {
-        final Territory territory = new Territory();
-        final TextureRegion region = atlas.findRegion(name);
-        territory.texture = region;
-        territory.setWidth(region.getRegionWidth());
-        territory.setHeight(region.getRegionHeight());
-        territory.name = WordUtils.capitalize(name.replace('-', ' '));
-
-        addActor(territory);
-        return territory;
-    }
-
     /**
-     * Helper method for setting position in Gimp-coordinates.
+     * Helper method for setting position in Gimp-coordinates (right-left corner to bottom-left corner coords).
      *
      * @param territory Territory
      * @param x         gimp x

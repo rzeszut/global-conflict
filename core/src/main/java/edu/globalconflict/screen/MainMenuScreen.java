@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import edu.globalconflict.Assets;
+import edu.globalconflict.MainAssets;
 import edu.globalconflict.Constants;
 import edu.globalconflict.TheGame;
 
@@ -45,17 +45,17 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // widgets
-        final Table table = new Table(Assets.skin);
+        final Table table = new Table(MainAssets.skin);
 
-        final TextButton startGameButton = new TextButton("Start game", Assets.skin);
-        final TextButton optionsButton = new TextButton("Options", Assets.skin);
-        final TextButton exitButton = new TextButton("Exit", Assets.skin);
+        final TextButton startGameButton = new TextButton("Start game", MainAssets.skin);
+        final TextButton optionsButton = new TextButton("Options", MainAssets.skin);
+        final TextButton exitButton = new TextButton("Exit", MainAssets.skin);
 
         // widgets config
         startGameButton.addListener(new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.startGame();
+                game.startLoadingGameAssets();
                 return true;
             }
         });

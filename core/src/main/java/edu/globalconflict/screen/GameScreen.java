@@ -19,7 +19,6 @@ public class GameScreen implements Screen {
     private TheGame game;
 
     private Stage stage;
-    private Image background;
 
     public GameScreen(TheGame game) {
         this.game = game;

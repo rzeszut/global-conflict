@@ -5,33 +5,32 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+        // old version of the library has TexturePacker2 utility, which can be used easily as a gradle task
+        classpath "com.badlogicgames.gdx:gdx-tools:0.9.9"
     }
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-
-import com.badlogic.gdx.tools.imagepacker.ImagePacker
-class ImageAtlasCreateTask extends DefaultTask {
-    def from
-    def to
-    def packName
-    def images
+import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
+class TextureSetupTask extends DefaultTask {
+    String from
+    String to
+    String packName = "textures.atlas"
 
     @TaskAction
     def pack() {
-        def packer = new ImagePacker()
+        TexturePacker2.process(from, to, packName)
     }
 }
 
-//task generateAmericaAtlas(type: TextureSetupTask) {
-//    from = "android/assets/image/america"
-//    to = "android/assets/image/gen"
-//    packName = "america.atlas"
-//}
-//processResources.dependsOn generateAmericaAtlas
+task generateAmericaAtlas(type: TextureSetupTask) {
+    from = "android/assets/image/america"
+    to = "android/assets/image/gen"
+    packName = "america.atlas"
+}
+processResources.dependsOn generateAmericaAtlas
 
 eclipse.project {
     name = appName + "-core"

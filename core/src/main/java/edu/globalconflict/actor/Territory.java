@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Array;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @author mateusz
  * @since 10.08.14
@@ -15,6 +17,7 @@ public class Territory extends Actor {
     Array<Vector2> polygonBounds;
     TextureRegion texture;
     String name;
+    Array<WeakReference<Territory>> neighbors;
 
     public Territory() {
         setTouchable(Touchable.enabled);
@@ -23,7 +26,6 @@ public class Territory extends Actor {
     @Override
     public void draw (Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
-        // TODO
     }
 
     @Override
