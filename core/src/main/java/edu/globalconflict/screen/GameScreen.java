@@ -3,22 +3,23 @@ package edu.globalconflict.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.TheGame;
-import edu.globalconflict.actor.World;
-import edu.globalconflict.listener.CameraGestureListener;
+import edu.globalconflict.controller.OrthographicCameraController;
+import edu.globalconflict.model.World;
+import edu.globalconflict.view.GameRenderer;
 
 /**
  * @author mateusz
  * @since 10.08.14
  */
-public class GameScreen implements Screen {
+public final class GameScreen implements Screen {
     private TheGame game;
 
-    private Stage stage;
+    private GameRenderer renderer;
 
     public GameScreen(TheGame game) {
         this.game = game;
@@ -29,24 +30,23 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.9f, 0.9f, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act(delta);
-        stage.draw();
+        renderer.render();
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().setWorldSize(width, height);
     }
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        Gdx.input.setInputProcessor(stage);
+        final OrthographicCamera camera = new OrthographicCamera(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        camera.translate(0, Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT);
+        camera.update();
 
-        stage.addActor(new World());
-        stage.addListener(new CameraGestureListener(stage.getCamera()));
+        renderer = new GameRenderer(camera, new World());
 
-        stage.getCamera().translate(0, Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT, 0);
+        final GestureDetector gestureDetector = new GestureDetector(new OrthographicCameraController(camera));
+        Gdx.input.setInputProcessor(gestureDetector);
     }
 
     @Override
@@ -64,6 +64,5 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
     }
 }

@@ -20,7 +20,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  * @author mateusz
  * @since 11.08.14
  */
-public class LoadingGameScreen implements Screen {
+public final class LoadingGameScreen implements Screen {
     private TheGame game;
     private Stage stage;
 

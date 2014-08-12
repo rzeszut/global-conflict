@@ -8,7 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.Constants;
 import edu.globalconflict.TheGame;
@@ -17,7 +21,7 @@ import edu.globalconflict.TheGame;
  * @author mateusz
  * @since 10.08.14
  */
-public class MainMenuScreen implements Screen {
+public final class MainMenuScreen implements Screen {
     private TheGame game;
     private Stage stage;
 
@@ -41,7 +45,8 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        // TODO: test all Scaling modes
+        stage = new Stage(new ScalingViewport(Scaling.none, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         // widgets

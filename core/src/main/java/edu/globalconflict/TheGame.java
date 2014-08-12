@@ -6,7 +6,7 @@ import edu.globalconflict.screen.GameScreen;
 import edu.globalconflict.screen.LoadingGameScreen;
 import edu.globalconflict.screen.MainMenuScreen;
 
-public class TheGame extends Game {
+public final class TheGame extends Game {
     public MainMenuScreen mainMenuScreen;
     public LoadingGameScreen loadingGameScreen;
     public GameScreen gameScreen;
