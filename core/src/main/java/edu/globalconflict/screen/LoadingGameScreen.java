@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
+import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.screen.action.CreateWorldAction;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -21,6 +21,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  * @since 11.08.14
  */
 public final class LoadingGameScreen implements Screen {
+    private static final float FADE_DELAY = 0.25f;
+
     private TheGame game;
     private Stage stage;
 
@@ -30,7 +32,7 @@ public final class LoadingGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
@@ -51,12 +53,15 @@ public final class LoadingGameScreen implements Screen {
         container.center();
         container.setFillParent(true);
 
+        final EntityManager entityManager = new EntityManager();
+
         stage.addActor(container);
         stage.addAction(sequence(
-                fadeIn(0.5f),
-                run(new LoadGameAssets()),
-                fadeOut(0.5f),
-                run(new StartGame())
+                fadeIn(FADE_DELAY),
+                run(new LoadGameAssetsAction()),
+                run(new CreateWorldAction(entityManager)),
+                fadeOut(FADE_DELAY),
+                run(new StartGameAction(entityManager))
         ));
     }
 
@@ -77,17 +82,23 @@ public final class LoadingGameScreen implements Screen {
         stage.dispose();
     }
 
-    private static final class LoadGameAssets implements Runnable {
+    private static final class LoadGameAssetsAction implements Runnable {
         @Override
         public void run() {
             GameAssets.load();
         }
     }
 
-    private final class StartGame implements Runnable {
+    private final class StartGameAction implements Runnable {
+        private EntityManager entityManager;
+
+        private StartGameAction(EntityManager entityManager) {
+            this.entityManager = entityManager;
+        }
+
         @Override
         public void run() {
-            game.startGame();
+            game.startGame(entityManager);
         }
     }
 }

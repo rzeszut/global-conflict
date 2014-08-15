@@ -25,12 +25,19 @@ class TextureSetupTask extends DefaultTask {
     }
 }
 
-task generateAmericaAtlas(type: TextureSetupTask) {
-    from = "android/assets/image/america"
+task generateNorthAmericaAtlas(type: TextureSetupTask) {
+    from = "android/assets/image/north-america"
     to = "android/assets/image/gen"
-    packName = "america.atlas"
+    packName = "north-america.atlas"
 }
-processResources.dependsOn generateAmericaAtlas
+task generateSouthAmericaAtlas(type: TextureSetupTask) {
+    from = "android/assets/image/south-america"
+    to = "android/assets/image/gen"
+    packName = "south-america.atlas"
+}
+
+processResources.dependsOn generateNorthAmericaAtlas
+processResources.dependsOn generateSouthAmericaAtlas
 
 eclipse.project {
     name = appName + "-core"

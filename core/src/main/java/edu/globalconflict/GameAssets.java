@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @since 11.08.14
  */
 public final class GameAssets {
-    private static TextureAtlas america;
+    private static TextureAtlas northAmerica;
     public static TextureRegion alaska;
     public static TextureRegion northwestTerritory;
     public static TextureRegion alberta;
@@ -20,26 +20,46 @@ public final class GameAssets {
     public static TextureRegion centralAmerica;
     public static TextureRegion greenland;
 
-    public static void load() {
-        if (america == null) {
-            america = new TextureAtlas(Gdx.files.internal("image/gen/america.atlas"));
+    private static TextureAtlas southAmerica;
+    public static TextureRegion venezuela;
+    public static TextureRegion brazil;
+    public static TextureRegion peru;
+    public static TextureRegion argentina;
 
-            alaska = america.findRegion("alaska");
-            northwestTerritory = america.findRegion("northwest-territory");
-            alberta = america.findRegion("alberta");
-            ontario = america.findRegion("ontario");
-            quebec = america.findRegion("quebec");
-            easternUS = america.findRegion("eastern-us");
-            westernUS = america.findRegion("western-us");
-            centralAmerica = america.findRegion("central-america");
-            greenland = america.findRegion("greenland");
+    public static void load() {
+        if (northAmerica == null) {
+            northAmerica = new TextureAtlas(Gdx.files.internal("image/gen/north-america.atlas"));
+
+            alaska = northAmerica.findRegion("alaska");
+            northwestTerritory = northAmerica.findRegion("northwest-territory");
+            alberta = northAmerica.findRegion("alberta");
+            ontario = northAmerica.findRegion("ontario");
+            quebec = northAmerica.findRegion("quebec");
+            easternUS = northAmerica.findRegion("eastern-us");
+            westernUS = northAmerica.findRegion("western-us");
+            centralAmerica = northAmerica.findRegion("central-america");
+            greenland = northAmerica.findRegion("greenland");
+        }
+
+        if (southAmerica == null) {
+            southAmerica = new TextureAtlas(Gdx.files.internal("image/gen/south-america.atlas"));
+
+            venezuela = southAmerica.findRegion("venezuela");
+            brazil = southAmerica.findRegion("brazil");
+            peru = southAmerica.findRegion("peru");
+            argentina = southAmerica.findRegion("argentina");
         }
     }
 
     public static void dispose() {
-        if (america != null) {
-            america.dispose();
-            america = null;
+        if (northAmerica != null) {
+            northAmerica.dispose();
+            northAmerica = null;
+        }
+
+        if (southAmerica != null) {
+            southAmerica.dispose();
+            southAmerica = null;
         }
     }
 }

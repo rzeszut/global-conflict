@@ -10,6 +10,6 @@ public interface Constants {
     float SCREEN_HEIGHT = 480.f;
 
     /* World */
-    float WORLD_WIDTH = 3064.f;
-    float WORLD_HEIGHT = 1519.f;
+    float WORLD_WIDTH = 3000.f;
+    float WORLD_HEIGHT = 1487.f;
 }
