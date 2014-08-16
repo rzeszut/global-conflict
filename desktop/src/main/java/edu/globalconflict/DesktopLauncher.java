@@ -9,6 +9,7 @@ public class DesktopLauncher {
         final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = (int) Constants.SCREEN_WIDTH;
         config.height = (int) Constants.SCREEN_HEIGHT;
+        config.title = "Global Conflict";
 
         new LwjglApplication(new TheGame(), config);
     }

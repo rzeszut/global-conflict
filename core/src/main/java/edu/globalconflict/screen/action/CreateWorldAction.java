@@ -67,7 +67,34 @@ public final class CreateWorldAction implements Runnable {
     }
 
     private void constructEurope() {
-        // iceland -- 1192, 180
+        entityBuilder
+                .newEntity()
+                .withTexture(GameAssets.iceland)
+                .withPosition(1192, 180)
+
+                .newEntity()
+                .withTexture(GameAssets.greatBritain)
+                .withPosition(1278, 314)
+
+                .newEntity()
+                .withTexture(GameAssets.westernEurope)
+                .withPosition(1271, 468)
+
+                .newEntity()
+                .withTexture(GameAssets.southernEurope)
+                .withPosition(1421, 468)
+
+                .newEntity()
+                .withTexture(GameAssets.northernEurope)
+                .withPosition(1393, 364)
+
+                .newEntity()
+                .withTexture(GameAssets.scandinavia)
+                .withPosition(1413, 259)
+
+                .newEntity()
+                .withTexture(GameAssets.ukraine)
+                .withPosition(1547, 450);
     }
 
     private void constructSouthAmerica() {
