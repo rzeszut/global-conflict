@@ -9,7 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @since 11.08.14
  */
 public final class GameAssets {
-    private static TextureAtlas northAmerica;
+    private static TextureAtlas world;
+
     public static TextureRegion alaska;
     public static TextureRegion northwestTerritory;
     public static TextureRegion alberta;
@@ -20,13 +21,11 @@ public final class GameAssets {
     public static TextureRegion centralAmerica;
     public static TextureRegion greenland;
 
-    private static TextureAtlas southAmerica;
     public static TextureRegion venezuela;
     public static TextureRegion brazil;
     public static TextureRegion peru;
     public static TextureRegion argentina;
 
-    private static TextureAtlas africa;
     public static TextureRegion madagascar;
     public static TextureRegion southAfrica;
     public static TextureRegion congo;
@@ -34,7 +33,6 @@ public final class GameAssets {
     public static TextureRegion westAfrica;
     public static TextureRegion egypt;
 
-    private static TextureAtlas europe;
     public static TextureRegion iceland;
     public static TextureRegion greatBritain;
     public static TextureRegion westernEurope;
@@ -43,93 +41,82 @@ public final class GameAssets {
     public static TextureRegion scandinavia;
     public static TextureRegion ukraine;
 
-    private static TextureAtlas australia;
     public static TextureRegion westernAustralia;
     public static TextureRegion easternAustralia;
     public static TextureRegion newGuinea;
     public static TextureRegion indonesia;
 
+    public static TextureRegion middleEast;
+    public static TextureRegion india;
+    public static TextureRegion afghanistan;
+    public static TextureRegion siam;
+    public static TextureRegion china;
+    public static TextureRegion japan;
+    public static TextureRegion mongolia;
+    public static TextureRegion ural;
+    public static TextureRegion siberia;
+    public static TextureRegion irkutsk;
+    public static TextureRegion yakutsk;
+    public static TextureRegion kamchatka;
+
     public static void load() {
-        if (northAmerica == null) {
-            northAmerica = new TextureAtlas(Gdx.files.internal("image/gen/north-america.atlas"));
+        if (world == null) {
+            world = new TextureAtlas(Gdx.files.internal("image/gen/world.atlas"));
 
-            alaska = northAmerica.findRegion("alaska");
-            northwestTerritory = northAmerica.findRegion("northwest-territory");
-            alberta = northAmerica.findRegion("alberta");
-            ontario = northAmerica.findRegion("ontario");
-            quebec = northAmerica.findRegion("quebec");
-            easternUS = northAmerica.findRegion("eastern-us");
-            westernUS = northAmerica.findRegion("western-us");
-            centralAmerica = northAmerica.findRegion("central-america");
-            greenland = northAmerica.findRegion("greenland");
-        }
+            alaska = world.findRegion("alaska");
+            northwestTerritory = world.findRegion("northwest-territory");
+            alberta = world.findRegion("alberta");
+            ontario = world.findRegion("ontario");
+            quebec = world.findRegion("quebec");
+            easternUS = world.findRegion("eastern-us");
+            westernUS = world.findRegion("western-us");
+            centralAmerica = world.findRegion("central-america");
+            greenland = world.findRegion("greenland");
 
-        if (southAmerica == null) {
-            southAmerica = new TextureAtlas(Gdx.files.internal("image/gen/south-america.atlas"));
+            venezuela = world.findRegion("venezuela");
+            brazil = world.findRegion("brazil");
+            peru = world.findRegion("peru");
+            argentina = world.findRegion("argentina");
 
-            venezuela = southAmerica.findRegion("venezuela");
-            brazil = southAmerica.findRegion("brazil");
-            peru = southAmerica.findRegion("peru");
-            argentina = southAmerica.findRegion("argentina");
-        }
+            madagascar = world.findRegion("madagascar");
+            southAfrica = world.findRegion("south-africa");
+            congo = world.findRegion("congo");
+            eastAfrica = world.findRegion("east-africa");
+            westAfrica = world.findRegion("west-africa");
+            egypt = world.findRegion("egypt");
 
-        if (africa == null) {
-            africa = new TextureAtlas(Gdx.files.internal("image/gen/africa.atlas"));
+            iceland = world.findRegion("iceland");
+            greatBritain = world.findRegion("great-britain");
+            westernEurope = world.findRegion("western-europe");
+            southernEurope = world.findRegion("southern-europe");
+            northernEurope = world.findRegion("northern-europe");
+            scandinavia = world.findRegion("scandinavia");
+            ukraine = world.findRegion("ukraine");
 
-            madagascar = africa.findRegion("madagascar");
-            southAfrica = africa.findRegion("south-africa");
-            congo = africa.findRegion("congo");
-            eastAfrica = africa.findRegion("east-africa");
-            westAfrica = africa.findRegion("west-africa");
-            egypt = africa.findRegion("egypt");
-        }
+            westernAustralia = world.findRegion("western-australia");
+            easternAustralia = world.findRegion("eastern-australia");
+            newGuinea = world.findRegion("new-guinea");
+            indonesia = world.findRegion("indonesia");
 
-        if (europe == null) {
-            europe = new TextureAtlas(Gdx.files.internal("image/gen/europe.atlas"));
-
-            iceland = europe.findRegion("iceland");
-            greatBritain = europe.findRegion("great-britain");
-            westernEurope = europe.findRegion("western-europe");
-            southernEurope = europe.findRegion("southern-europe");
-            northernEurope = europe.findRegion("northern-europe");
-            scandinavia = europe.findRegion("scandinavia");
-            ukraine = europe.findRegion("ukraine");
-        }
-
-        if (australia == null) {
-            australia = new TextureAtlas(Gdx.files.internal("image/gen/australia.atlas"));
-
-            westernAustralia = australia.findRegion("western-australia");
-            easternAustralia = australia.findRegion("eastern-australia");
-            newGuinea = australia.findRegion("new-guinea");
-            indonesia = australia.findRegion("indonesia");
+            middleEast = world.findRegion("middle-east");
+            india = world.findRegion("india");
+            afghanistan = world.findRegion("afghanistan");
+            siam = world.findRegion("siam");
+            china = world.findRegion("china");
+            japan = world.findRegion("japan");
+            mongolia = world.findRegion("mongolia");
+            ural = world.findRegion("ural");
+            siberia = world.findRegion("siberia");
+            irkutsk = world.findRegion("irkutsk");
+            yakutsk = world.findRegion("yakutsk");
+            kamchatka = world.findRegion("kamchatka");
         }
     }
 
     public static void dispose() {
-        if (northAmerica != null) {
-            northAmerica.dispose();
-            northAmerica = null;
-        }
-
-        if (southAmerica != null) {
-            southAmerica.dispose();
-            southAmerica = null;
-        }
-
-        if (africa != null) {
-            africa.dispose();
-            africa = null;
-        }
-
-        if (europe != null) {
-            europe.dispose();
-            europe = null;
-        }
-
-        if (australia != null) {
-            australia.dispose();
-            australia = null;
+        if (world != null) {
+            world.dispose();
+            world = null;
         }
     }
 }

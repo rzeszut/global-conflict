@@ -53,6 +53,54 @@ public final class CreateWorldAction implements Runnable {
     }
 
     private void constructAsia() {
+        entityBuilder
+                .newEntity()
+                .withTexture(GameAssets.middleEast)
+                .withPosition(1602, 733)
+
+                .newEntity()
+                .withTexture(GameAssets.india)
+                .withPosition(1948, 806)
+
+                .newEntity()
+                .withTexture(GameAssets.afghanistan)
+                .withPosition(1788, 473)
+
+                .newEntity()
+                .withTexture(GameAssets.siam)
+                .withPosition(2279, 939)
+
+                .newEntity()
+                .withTexture(GameAssets.china)
+                .withPosition(2061, 671)
+
+                .newEntity()
+                .withTexture(GameAssets.japan)
+                .withPosition(2602, 528)
+
+                .newEntity()
+                .withTexture(GameAssets.mongolia)
+                .withPosition(2154, 488)
+
+                .newEntity()
+                .withTexture(GameAssets.ural)
+                .withPosition(1834, 352)
+
+                .newEntity()
+                .withTexture(GameAssets.siberia)
+                .withPosition(1951, 331)
+
+                .newEntity()
+                .withTexture(GameAssets.irkutsk)
+                .withPosition(2151, 328)
+
+                .newEntity()
+                .withTexture(GameAssets.yakutsk)
+                .withPosition(2167, 252)
+
+                .newEntity()
+                .withTexture(GameAssets.kamchatka)
+                .withPosition(2469, 396);
     }
 
     private void constructAfrica() {
@@ -75,7 +123,7 @@ public final class CreateWorldAction implements Runnable {
 
                 .newEntity()
                 .withTexture(GameAssets.westAfrica)
-                .withPosition(1187, 847)
+                .withPosition(1178, 847)
 
                 .newEntity()
                 .withTexture(GameAssets.egypt)
@@ -145,7 +193,7 @@ public final class CreateWorldAction implements Runnable {
 
                 .newEntity()
                 .withTexture(GameAssets.alberta)
-                .withPosition(234, 328)
+                .withPosition(234, 327)
 
                 .newEntity()
                 .withTexture(GameAssets.ontario)
