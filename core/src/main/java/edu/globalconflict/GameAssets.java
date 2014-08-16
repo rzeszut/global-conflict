@@ -43,6 +43,12 @@ public final class GameAssets {
     public static TextureRegion scandinavia;
     public static TextureRegion ukraine;
 
+    private static TextureAtlas australia;
+    public static TextureRegion westernAustralia;
+    public static TextureRegion easternAustralia;
+    public static TextureRegion newGuinea;
+    public static TextureRegion indonesia;
+
     public static void load() {
         if (northAmerica == null) {
             northAmerica = new TextureAtlas(Gdx.files.internal("image/gen/north-america.atlas"));
@@ -89,6 +95,15 @@ public final class GameAssets {
             scandinavia = europe.findRegion("scandinavia");
             ukraine = europe.findRegion("ukraine");
         }
+
+        if (australia == null) {
+            australia = new TextureAtlas(Gdx.files.internal("image/gen/australia.atlas"));
+
+            westernAustralia = australia.findRegion("western-australia");
+            easternAustralia = australia.findRegion("eastern-australia");
+            newGuinea = australia.findRegion("new-guinea");
+            indonesia = australia.findRegion("indonesia");
+        }
     }
 
     public static void dispose() {
@@ -110,6 +125,11 @@ public final class GameAssets {
         if (europe != null) {
             europe.dispose();
             europe = null;
+        }
+
+        if (australia != null) {
+            australia.dispose();
+            australia = null;
         }
     }
 }

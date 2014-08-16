@@ -34,6 +34,22 @@ public final class CreateWorldAction implements Runnable {
     }
 
     private void constructAustralia() {
+        entityBuilder
+                .newEntity()
+                .withTexture(GameAssets.westernAustralia)
+                .withPosition(2474, 1300)
+
+                .newEntity()
+                .withTexture(GameAssets.easternAustralia)
+                .withPosition(2630, 1362)
+
+                .newEntity()
+                .withTexture(GameAssets.newGuinea)
+                .withPosition(2657, 999)
+
+                .newEntity()
+                .withTexture(GameAssets.indonesia)
+                .withPosition(2326, 988);
     }
 
     private void constructAsia() {

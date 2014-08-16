@@ -45,11 +45,17 @@ task generateEuropeAtlas(type: TextureSetupTask) {
     to = "android/assets/image/gen"
     packName = "europe.atlas"
 }
+task generateAustraliaAtlas(type: TextureSetupTask) {
+    from = "android/assets/image/australia"
+    to = "android/assets/image/gen"
+    packName = "australia.atlas"
+}
 
 processResources.dependsOn generateNorthAmericaAtlas
 processResources.dependsOn generateSouthAmericaAtlas
 processResources.dependsOn generateAfricaAtlas
 processResources.dependsOn generateEuropeAtlas
+processResources.dependsOn generateAustraliaAtlas
 
 eclipse.project {
     name = appName + "-core"
