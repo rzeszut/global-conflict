@@ -8,6 +8,7 @@ import edu.globalconflict.Constants;
 import edu.globalconflict.component.*;
 import edu.globalconflict.entity.Component;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.Tag;
 
 import java.util.UUID;
 
@@ -28,8 +29,8 @@ public final class EntityBuilder {
         return this;
     }
 
-    public EntityBuilder newEntity(String... tags) {
-        this.entity = manager.newTaggedEntity(tags);
+    public EntityBuilder newEntity(Tag.Namespace namespace, String tag) {
+        this.entity = manager.newTaggedEntity(namespace, tag);
         return this;
     }
 

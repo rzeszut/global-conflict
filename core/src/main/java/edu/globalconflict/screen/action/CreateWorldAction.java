@@ -5,6 +5,7 @@ import edu.globalconflict.GameAssets;
 import edu.globalconflict.builder.EntityBuilder;
 import edu.globalconflict.component.PlayerClick;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.Tag;
 
 /**
  * @author mateusz
@@ -28,7 +29,7 @@ public final class CreateWorldAction implements Runnable {
 
         // create one player entity
         entityBuilder
-                .newEntity("Player 1")
+                .newEntity(Tag.Namespace.PLAYER, "Player 1")
                 .withComponent(new PlayerClick());
     }
 
@@ -39,6 +40,30 @@ public final class CreateWorldAction implements Runnable {
     }
 
     private void constructAfrica() {
+        entityBuilder
+                .newEntity()
+                .withTexture(GameAssets.madagascar)
+                .withPosition(1787, 1161)
+
+                .newEntity()
+                .withTexture(GameAssets.southAfrica)
+                .withPosition(1472, 1262)
+
+                .newEntity()
+                .withTexture(GameAssets.congo)
+                .withPosition(1444, 1017)
+
+                .newEntity()
+                .withTexture(GameAssets.eastAfrica)
+                .withPosition(1580, 1053)
+
+                .newEntity()
+                .withTexture(GameAssets.westAfrica)
+                .withPosition(1187, 847)
+
+                .newEntity()
+                .withTexture(GameAssets.egypt)
+                .withPosition(1451, 652);
     }
 
     private void constructEurope() {

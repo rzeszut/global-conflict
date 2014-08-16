@@ -26,6 +26,14 @@ public final class GameAssets {
     public static TextureRegion peru;
     public static TextureRegion argentina;
 
+    private static TextureAtlas africa;
+    public static TextureRegion madagascar;
+    public static TextureRegion southAfrica;
+    public static TextureRegion congo;
+    public static TextureRegion eastAfrica;
+    public static TextureRegion westAfrica;
+    public static TextureRegion egypt;
+
     public static void load() {
         if (northAmerica == null) {
             northAmerica = new TextureAtlas(Gdx.files.internal("image/gen/north-america.atlas"));
@@ -49,6 +57,17 @@ public final class GameAssets {
             peru = southAmerica.findRegion("peru");
             argentina = southAmerica.findRegion("argentina");
         }
+
+        if (africa == null) {
+            africa = new TextureAtlas(Gdx.files.internal("image/gen/africa.atlas"));
+
+            madagascar = africa.findRegion("madagascar");
+            southAfrica = africa.findRegion("south-africa");
+            congo = africa.findRegion("congo");
+            eastAfrica = africa.findRegion("east-africa");
+            westAfrica = africa.findRegion("west-africa");
+            egypt = africa.findRegion("egypt");
+        }
     }
 
     public static void dispose() {
@@ -60,6 +79,11 @@ public final class GameAssets {
         if (southAmerica != null) {
             southAmerica.dispose();
             southAmerica = null;
+        }
+
+        if (africa != null) {
+            africa.dispose();
+            africa = null;
         }
     }
 }

@@ -6,12 +6,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import edu.globalconflict.component.PlayerClick;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.Tag;
 
 import java.util.UUID;
 
 /**
- * TODO: change to game controller
- *
  * @author mateusz
  * @since 12.08.14
  */
@@ -36,7 +35,7 @@ public class GameController implements GestureDetector.GestureListener {
     @Override
     public boolean tap(float x, float y, int count, int button) {
         // TODO: think of some structure for current player data
-        final UUID playerEntity = entityManager.getEntityForTag("Player 1");
+        final UUID playerEntity = entityManager.getEntityForTag(Tag.Namespace.PLAYER, "Player 1");
         final PlayerClick playerClick = entityManager.getComponent(playerEntity, PlayerClick.class);
 
         unprojectedClick.set(x, y, 0);

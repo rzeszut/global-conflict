@@ -8,8 +8,10 @@ import java.util.*;
  */
 public final class EntityManager {
     private Map<Class<? extends Component>, Map<UUID, ? extends Component>> componentMap;
-    private Map<UUID, List<String>> entitiesToTags;
-    private Map<String, List<UUID>> tagsToEntities;
+    private Map<UUID, Tag> entitiesToTags;
+    private Map<Tag, UUID> tagsToEntities;
+
+    private Tag tmpTag = new Tag();
 
     public EntityManager() {
         componentMap = new HashMap<>();
@@ -21,32 +23,22 @@ public final class EntityManager {
         return UUID.randomUUID();
     }
 
-    public UUID newTaggedEntity(String... tags) {
+    public UUID newTaggedEntity(Tag.Namespace namespace, String tag) {
         final UUID entity = newEntity();
-        for (String tag : tags) {
-            tagEntity(entity, tag);
-        }
+        tagEntity(entity, namespace, tag);
         return entity;
     }
 
-    public void tagEntity(UUID entity, String tag) {
-        List<String> tags = entitiesToTags.get(entity);
-        if (tags == null) {
-            tags = new LinkedList<>();
-            tags.add(tag);
-            entitiesToTags.put(entity, tags);
+    public void tagEntity(UUID entity, Tag.Namespace namespace, String tagString) {
+        Tag tag = entitiesToTags.get(entity);
+        if (tag == null) {
+            tag = new Tag(namespace, tagString);
+            entitiesToTags.put(entity, tag);
         } else {
-            tags.add(tag);
+            tag.set(namespace, tagString);
         }
 
-        List<UUID> entities = tagsToEntities.get(tag);
-        if (entities == null) {
-            entities = new LinkedList<>();
-            entities.add(entity);
-            tagsToEntities.put(tag, entities);
-        } else {
-            entities.add(entity);
-        }
+        tagsToEntities.put(tag, entity);
     }
 
     @SuppressWarnings("unchecked")
@@ -86,12 +78,8 @@ public final class EntityManager {
                 components.entrySet();
     }
 
-    public List<UUID> getEntitiesForTag(String tag) {
-        return tagsToEntities.get(tag);
-    }
-
-    public UUID getEntityForTag(String tag) {
-        final List<UUID> entities = tagsToEntities.get(tag);
-        return entities == null ? null : entities.get(0);
+    public UUID getEntityForTag(Tag.Namespace namespace, String tag) {
+        tmpTag.set(namespace, tag);
+        return tagsToEntities.get(tmpTag);
     }
 }
