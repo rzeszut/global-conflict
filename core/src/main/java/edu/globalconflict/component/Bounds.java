@@ -1,17 +1,22 @@
 package edu.globalconflict.component;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import edu.globalconflict.entity.Component;
 
 /**
+ * Component containing polygon bounds of an entity.
+ *
  * @author mateusz
  * @since 15.08.14
  */
 public final class Bounds implements Component {
-    public Array<Vector2> bounds;
+    /**
+     * Polygon bounds of an entity.
+     * An array of vertices in format [x1, y1, x2, y2, ...], where x* and y* are in entity's local coordinates,
+     * not world coordinates.
+     */
+    public float[] bounds;
 
-    public Bounds(Array<Vector2> bounds) {
+    public Bounds(float[] bounds) {
         this.bounds = bounds;
     }
 }

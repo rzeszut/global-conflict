@@ -18,11 +18,11 @@ import java.util.UUID;
  * @author mateusz
  * @since 15.08.14
  */
-public final class RenderProcessor implements Processor {
+public final class TextureRenderProcessor implements Processor {
     private OrthographicCamera camera;
     private Batch batch;
 
-    public RenderProcessor(OrthographicCamera camera) {
+    public TextureRenderProcessor(OrthographicCamera camera) {
         this.camera = camera;
         this.batch = new SpriteBatch();
     }
@@ -31,7 +31,6 @@ public final class RenderProcessor implements Processor {
     public void process(EntityManager entityManager, float delta) {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-
         batch.begin();
 
         // draw textures
@@ -41,10 +40,14 @@ public final class RenderProcessor implements Processor {
             final UUID entity = entry.getKey();
             final Texture texture = entry.getValue();
 
+            // get tint color and position
             final TintColor tintColor = entityManager.getComponent(entity, TintColor.class);
             final Position position = entityManager.getComponent(entity, Position.class);
 
+            // if color is present, tint the texture
             batch.setColor(tintColor == null ? Color.WHITE : tintColor.color);
+
+            // draw
             batch.draw(texture.region, position.x, position.y);
         }
 

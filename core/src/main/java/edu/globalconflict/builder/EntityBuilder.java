@@ -2,8 +2,6 @@ package edu.globalconflict.builder;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import edu.globalconflict.Constants;
 import edu.globalconflict.component.*;
 import edu.globalconflict.entity.Component;
@@ -55,19 +53,18 @@ public final class EntityBuilder {
         return this;
     }
 
-    public EntityBuilder withBounds (float[] indices) {
-        assert indices.length >= 6;
-        assert indices.length % 2 == 0;
+    public EntityBuilder withBounds (float... bounds) {
+        assert bounds.length >= 6;
+        assert bounds.length % 2 == 0;
 
         final Size size = manager.getComponent(entity, Size.class);
         assert size != null;
 
-        final int count = indices.length / 2;
-        final Array<Vector2> bounds = new Array<>(count);
+        final int count = bounds.length / 2;
 
         for (int i = 0; i < count; ++i) {
-            float x = indices[2 * i], y = indices[2 * i + 1];
-            bounds.insert(i, new Vector2(x, size.width - y));
+            float y = bounds[2 * i + 1];
+            bounds[2 * i + 1] = size.height - y;
         }
 
         manager.addComponent(entity, new Bounds(bounds));

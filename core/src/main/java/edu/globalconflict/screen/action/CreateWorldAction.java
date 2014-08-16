@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.builder.EntityBuilder;
 import edu.globalconflict.component.PlayerClick;
+import edu.globalconflict.component.TerritorySelected;
+import edu.globalconflict.component.TintColor;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
 
@@ -186,6 +188,9 @@ public final class CreateWorldAction implements Runnable {
                 .newEntity()
                 .withTexture(GameAssets.alaska)
                 .withPosition(0, 263)
+                .withBounds(0, 148, 44, 85, 122, 24, 335, 10, 225, 115)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.northwestTerritory)

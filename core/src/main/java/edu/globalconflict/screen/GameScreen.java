@@ -11,8 +11,10 @@ import edu.globalconflict.TheGame;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.processor.DebugRenderProcessor;
 import edu.globalconflict.processor.PlayerClickProcessor;
-import edu.globalconflict.processor.RenderProcessor;
+import edu.globalconflict.processor.TextureRenderProcessor;
+import edu.globalconflict.processor.TerritorySelectedProcessor;
 
 /**
  * @author mateusz
@@ -54,7 +56,9 @@ public final class GameScreen implements Screen {
 
         engine = new Engine(entityManager);
         engine.registerProcessor(new PlayerClickProcessor());
-        engine.registerProcessor(new RenderProcessor(camera));
+        engine.registerProcessor(new TerritorySelectedProcessor());
+        engine.registerProcessor(new TextureRenderProcessor(camera));
+        engine.registerProcessor(new DebugRenderProcessor(camera));
 
         final GameController controller = new GameController(camera, entityManager);
         Gdx.input.setInputProcessor(new GestureDetector(controller));
