@@ -33,12 +33,12 @@ public final class TextureRenderProcessor implements Processor {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        // draw textures
-        final Set<Map.Entry<UUID, Texture>> entitiesWithComponents =
+        // iterate over textured entities
+        final Set<Map.Entry<UUID, Texture>> texturedEntities =
                 entityManager.getEntitiesWithComponentsForType(Texture.class);
-        for (Map.Entry<UUID, Texture> entry : entitiesWithComponents) {
-            final UUID entity = entry.getKey();
-            final Texture texture = entry.getValue();
+        for (Map.Entry<UUID, Texture> texturedEntity : texturedEntities) {
+            final UUID entity = texturedEntity.getKey();
+            final Texture texture = texturedEntity.getValue();
 
             // get tint color and position
             final TintColor tintColor = entityManager.getComponent(entity, TintColor.class);

@@ -12,4 +12,7 @@ public interface Constants {
     /* World */
     float WORLD_WIDTH = 3000.f;
     float WORLD_HEIGHT = 1487.f;
+
+    /* Game entity name */
+    String GAME_ENTITY = "state";
 }

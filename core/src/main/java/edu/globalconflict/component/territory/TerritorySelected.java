@@ -1,4 +1,4 @@
-package edu.globalconflict.component;
+package edu.globalconflict.component.territory;
 
 import edu.globalconflict.entity.Component;
 

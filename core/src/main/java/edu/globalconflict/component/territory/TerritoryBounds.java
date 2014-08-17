@@ -1,4 +1,4 @@
-package edu.globalconflict.component;
+package edu.globalconflict.component.territory;
 
 import edu.globalconflict.entity.Component;
 
@@ -8,7 +8,7 @@ import edu.globalconflict.entity.Component;
  * @author mateusz
  * @since 15.08.14
  */
-public final class Bounds implements Component {
+public final class TerritoryBounds implements Component {
     /**
      * Polygon bounds of an entity.
      * An array of vertices in format [x1, y1, x2, y2, ...], where x* and y* are in entity's local coordinates,
@@ -16,7 +16,7 @@ public final class Bounds implements Component {
      */
     public float[] bounds;
 
-    public Bounds(float[] bounds) {
+    public TerritoryBounds(float[] bounds) {
         this.bounds = bounds;
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.globalconflict.Constants;
 import edu.globalconflict.component.*;
+import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.entity.Component;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
@@ -67,7 +68,7 @@ public final class EntityBuilder {
             bounds[2 * i + 1] = size.height - y;
         }
 
-        manager.addComponent(entity, new Bounds(bounds));
+        manager.addComponent(entity, new TerritoryBounds(bounds));
         return this;
     }
 }

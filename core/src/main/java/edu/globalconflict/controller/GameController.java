@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import edu.globalconflict.component.PlayerClick;
+import edu.globalconflict.Constants;
+import edu.globalconflict.component.game.PlayerClick;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
 
@@ -34,8 +35,7 @@ public class GameController implements GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        // TODO: think of some structure for current player data
-        final UUID playerEntity = entityManager.getEntityForTag(Tag.Namespace.PLAYER, "Player 1");
+        final UUID playerEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
         final PlayerClick playerClick = entityManager.getComponent(playerEntity, PlayerClick.class);
 
         unprojectedClick.set(x, y, 0);

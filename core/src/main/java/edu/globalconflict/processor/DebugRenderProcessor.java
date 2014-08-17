@@ -3,7 +3,7 @@ package edu.globalconflict.processor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import edu.globalconflict.component.Bounds;
+import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.component.Position;
 import edu.globalconflict.component.Size;
 import edu.globalconflict.entity.EntityManager;
@@ -33,13 +33,13 @@ public final class DebugRenderProcessor implements Processor {
         debugRenderer.begin();
 
         // iterate over entities with bounds
-        final Set<Map.Entry<UUID, Bounds>> boundedEntities =
-                entityManager.getEntitiesWithComponentsForType(Bounds.class);
-        for (Map.Entry<UUID, Bounds> boundedEntity : boundedEntities) {
+        final Set<Map.Entry<UUID, TerritoryBounds>> boundedEntities =
+                entityManager.getEntitiesWithComponentsForType(TerritoryBounds.class);
+        for (Map.Entry<UUID, TerritoryBounds> boundedEntity : boundedEntities) {
             final UUID entity = boundedEntity.getKey();
 
             // get bounds, position and size
-            final Bounds bounds = boundedEntity.getValue();
+            final TerritoryBounds bounds = boundedEntity.getValue();
             final Position position = entityManager.getComponent(entity, Position.class);
             final Size size = entityManager.getComponent(entity, Size.class);
 

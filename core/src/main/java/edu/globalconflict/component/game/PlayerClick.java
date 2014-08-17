@@ -1,4 +1,4 @@
-package edu.globalconflict.component;
+package edu.globalconflict.component.game;
 
 import edu.globalconflict.entity.Component;
 
