@@ -169,20 +169,32 @@ public final class CreateWorldAction implements Runnable {
         entityBuilder
                 .newEntity()
                 .withTexture(GameAssets.venezuela)
-                .withTintColor(Color.MAGENTA)
                 .withPosition(533, 925)
+                .withBounds(1, 124, 79, 2, 287, 91, 209, 125, 193, 85, 101, 138, 101, 189)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.brazil)
                 .withPosition(598, 1247)
+                .withBounds(1, 133, 132, 2, 234, 33, 397, 122, 329, 309, 244, 419, 194, 381, 219, 334, 140, 202,
+                        73, 154)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.peru)
                 .withPosition(514, 1181)
+                .withBounds(21, 2, 108, 51, 81, 94, 243, 190, 294, 281, 282, 317, 206, 256, 158, 262, 7, 77)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.argentina)
-                .withPosition(639, 1487);
+                .withPosition(639, 1487)
+                .withBounds(8, 1, 34, 61, 80, 46, 198, 170, 124, 323, 170, 406, 120, 401, 38, 314)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor());
     }
 
     private void constructNorthAmerica() {
