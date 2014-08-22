@@ -8,14 +8,12 @@ import java.util.*;
  */
 public final class EntityManager {
     private Map<Class<? extends Component>, Map<UUID, ? extends Component>> componentMap;
-    private Map<UUID, Tag> entitiesToTags;
     private Map<Tag, UUID> tagsToEntities;
 
     private Tag tmpTag = new Tag();
 
     public EntityManager() {
         componentMap = new HashMap<>();
-        entitiesToTags = new HashMap<>();
         tagsToEntities = new HashMap<>();
     }
 
@@ -30,14 +28,7 @@ public final class EntityManager {
     }
 
     public void tagEntity(UUID entity, Tag.Namespace namespace, String tagString) {
-        Tag tag = entitiesToTags.get(entity);
-        if (tag == null) {
-            tag = new Tag(namespace, tagString);
-            entitiesToTags.put(entity, tag);
-        } else {
-            tag.set(namespace, tagString);
-        }
-
+        final Tag tag = new Tag(namespace, tagString);
         tagsToEntities.put(tag, entity);
     }
 

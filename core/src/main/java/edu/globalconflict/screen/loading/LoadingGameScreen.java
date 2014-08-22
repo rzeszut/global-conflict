@@ -1,4 +1,4 @@
-package edu.globalconflict.screen;
+package edu.globalconflict.screen.loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,7 +12,7 @@ import edu.globalconflict.GameAssets;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
 import edu.globalconflict.entity.EntityManager;
-import edu.globalconflict.screen.action.CreateWorldAction;
+import edu.globalconflict.screen.loading.CreateWorldAction;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 

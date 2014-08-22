@@ -16,7 +16,7 @@ public final class Tag {
         this.tag = tag;
     }
 
-    public void set(Namespace namespace, String tag) {
+    void set(Namespace namespace, String tag) {
         this.namespace = namespace;
         this.tag = tag;
     }
@@ -44,6 +44,7 @@ public final class Tag {
     public static enum Namespace {
         GAME,
         PLAYER,
-        TERRITORY
+        TERRITORY,
+        ARMY_LOCATION
     }
 }

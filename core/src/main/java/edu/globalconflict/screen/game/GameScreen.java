@@ -1,20 +1,23 @@
-package edu.globalconflict.screen;
+package edu.globalconflict.screen.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
+import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
+import edu.globalconflict.component.game.PlayerAction;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
-import edu.globalconflict.processor.DebugRenderProcessor;
-import edu.globalconflict.processor.PlayerClickProcessor;
-import edu.globalconflict.processor.TextureRenderProcessor;
-import edu.globalconflict.processor.TerritorySelectedProcessor;
+import edu.globalconflict.processor.*;
 
 /**
  * @author mateusz
@@ -36,10 +39,14 @@ public final class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // update UI
         uiStage.act(delta);
-        uiStage.draw();
 
+        // run every processor
         engine.update(delta);
+
+        // draw UI on top
+        uiStage.draw();
     }
 
     @Override
@@ -48,11 +55,23 @@ public final class GameScreen implements Screen {
 
     @Override
     public void show() {
-        uiStage = new Stage();
+        // Game UI
+        final Table table = createGameUI();
 
+        // current player label
+        final Label currentPlayerLabel = new Label("", MainAssets.skin);
+        currentPlayerLabel.setPosition(10, Constants.SCREEN_HEIGHT - 30);
+
+        uiStage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        uiStage.addActor(table);
+        uiStage.addActor(currentPlayerLabel);
+
+        // Game camera
         final OrthographicCamera camera = createCamera();
 
+        // Register processors -- game logic
         engine = new Engine(entityManager);
+        engine.registerProcessor(new PlayerActionProcessor(currentPlayerLabel));
         engine.registerProcessor(new PlayerClickProcessor());
         engine.registerProcessor(new TerritorySelectedProcessor());
         engine.registerProcessor(new TextureRenderProcessor(camera));
@@ -60,8 +79,33 @@ public final class GameScreen implements Screen {
             engine.registerProcessor(new DebugRenderProcessor(camera));
         }
 
+        // input controller
         final GameController controller = new GameController(camera, entityManager);
-        Gdx.input.setInputProcessor(new GestureDetector(controller));
+        final InputProcessor inputProcessor = new InputMultiplexer(uiStage, new GestureDetector(controller));
+        Gdx.input.setInputProcessor(inputProcessor);
+    }
+
+    private Table createGameUI() {
+        final TextButton attackButton = new TextButton("Attack", MainAssets.skin);
+        attackButton.addListener(new ActionButtonListener(entityManager, PlayerAction.ATTACK));
+
+        final TextButton transferButton = new TextButton("Transfer", MainAssets.skin);
+        // TODO: action listener -- open pop-up, select number (validated - min/max), fire player action event
+
+        final TextButton endTurnButton = new TextButton("End turn", MainAssets.skin);
+        endTurnButton.addListener(new ActionButtonListener(entityManager, PlayerAction.END_TURN));
+
+        final Table table = new Table(MainAssets.skin);
+        table.add(attackButton).width(80);
+        table.row();
+        table.add(transferButton).width(80).padTop(5);
+        table.row();
+        table.add(endTurnButton).width(80).padTop(5);
+        table.row();
+        table.pad(5);
+        table.pack();
+
+        return table;
     }
 
     private OrthographicCamera createCamera() {

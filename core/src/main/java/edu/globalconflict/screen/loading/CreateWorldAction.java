@@ -1,21 +1,25 @@
-package edu.globalconflict.screen.action;
+package edu.globalconflict.screen.loading;
 
+import com.badlogic.gdx.graphics.Color;
 import edu.globalconflict.Constants;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.builder.EntityBuilder;
+import edu.globalconflict.component.Player;
 import edu.globalconflict.component.TintColor;
-import edu.globalconflict.component.game.PlayerClick;
-import edu.globalconflict.component.game.SelectedTerritoriesStack;
+import edu.globalconflict.component.game.*;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author mateusz
  * @since 15.08.14
  */
 public final class CreateWorldAction implements Runnable {
-    private EntityBuilder entityBuilder;
+    private final EntityBuilder entityBuilder;
 
     public CreateWorldAction(EntityManager entityManager) {
         this.entityBuilder = new EntityBuilder(entityManager);
@@ -30,9 +34,21 @@ public final class CreateWorldAction implements Runnable {
         constructAsia();
         constructAustralia();
 
+        final List<Player> players = Arrays.asList(
+                new Player("Player 1", Color.BLUE),
+                new Player("Player 2", Color.RED)
+        );
+
+        // END TURN action at the beginning of the game sets some labels, adds troops and so on.
+        // This is pretty much required setup.
+        final PlayerAction playerAction = new PlayerAction();
+        playerAction.set(PlayerAction.END_TURN);
+
         entityBuilder
                 .newEntity(Tag.Namespace.GAME, Constants.GAME_ENTITY)
+                .withComponent(new CurrentPlayer(players))
                 .withComponent(new PlayerClick())
+                .withComponent(playerAction)
                 .withComponent(new SelectedTerritoriesStack());
     }
 

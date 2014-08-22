@@ -3,8 +3,8 @@ package edu.globalconflict;
 
 import com.badlogic.gdx.Game;
 import edu.globalconflict.entity.EntityManager;
-import edu.globalconflict.screen.GameScreen;
-import edu.globalconflict.screen.LoadingGameScreen;
+import edu.globalconflict.screen.game.GameScreen;
+import edu.globalconflict.screen.loading.LoadingGameScreen;
 import edu.globalconflict.screen.MainMenuScreen;
 
 public final class TheGame extends Game {
