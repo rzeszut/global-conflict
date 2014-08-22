@@ -15,4 +15,7 @@ public interface Constants {
 
     /* Game entity name */
     String GAME_ENTITY = "state";
+
+    /* Debug mode */
+    boolean DEBUG = true;
 }

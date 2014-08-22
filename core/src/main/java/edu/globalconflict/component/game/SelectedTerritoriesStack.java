@@ -6,6 +6,8 @@ import edu.globalconflict.util.Stack;
 import java.util.UUID;
 
 /**
+ * Stack containing id's of all currently selected territories.
+ *
  * @author mateusz
  * @since 17.08.14
  */

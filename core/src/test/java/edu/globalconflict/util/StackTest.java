@@ -2,6 +2,8 @@ package edu.globalconflict.util;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class StackTest {
@@ -104,7 +106,7 @@ public class StackTest {
     @Test
     public void testRemove() {
         // given
-        final Stack<String> stack = new Stack<>(5);
+        final Stack<String> stack = new Stack<>(4);
         stack.push("elem1");
         stack.push("elem2");
         stack.push("elem3");
@@ -118,5 +120,24 @@ public class StackTest {
         assertEquals("elem4", stack.pop());
         assertEquals("elem3", stack.pop());
         assertEquals("elem1", stack.pop());
+    }
+
+    @Test
+    public void testIterator() {
+        final Stack<String> stack = new Stack<>(5);
+        stack.push("elem1");
+        stack.push("elem2");
+        stack.push("elem3");
+        stack.push("elem4");
+
+        // when
+        final Iterator<String> iterator = stack.iterator();
+
+        // then
+        assertEquals("elem4", iterator.next());
+        assertEquals("elem3", iterator.next());
+        assertEquals("elem2", iterator.next());
+        assertEquals("elem1", iterator.next());
+        assertFalse(iterator.hasNext());
     }
 }

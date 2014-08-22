@@ -35,8 +35,8 @@ public class GameController implements GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        final UUID playerEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
-        final PlayerClick playerClick = entityManager.getComponent(playerEntity, PlayerClick.class);
+        final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
+        final PlayerClick playerClick = entityManager.getComponent(gameEntity, PlayerClick.class);
 
         unprojectedClick.set(x, y, 0);
         camera.unproject(unprojectedClick);

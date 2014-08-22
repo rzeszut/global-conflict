@@ -1,6 +1,5 @@
 package edu.globalconflict.processor;
 
-import com.badlogic.gdx.graphics.Color;
 import edu.globalconflict.Constants;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.component.TintColor;
@@ -18,7 +17,8 @@ import java.util.UUID;
  * @since 16.08.14
  */
 public final class TerritorySelectedProcessor implements Processor {
-    private static final Color MODIFIER = new Color(0.5f, 0.5f, 0.5f, 0);
+    private static final float MODIFIER = 0.5f;
+    private static final float INV_MODIFIER = 2f;
 
     @Override
     public void process(EntityManager entityManager, float delta) {
@@ -40,10 +40,10 @@ public final class TerritorySelectedProcessor implements Processor {
 
                 // modify it according to selection and push changes
                 if (selected.selected) {
-                    color.color.sub(MODIFIER);
+                    color.color.mul(MODIFIER, MODIFIER, MODIFIER, 1f);
                     territoriesStack.territories.push(entity);
                 } else {
-                    color.color.add(MODIFIER);
+                    color.color.mul(INV_MODIFIER, INV_MODIFIER, INV_MODIFIER, 1f);
                     territoriesStack.territories.remove(entity);
                 }
 

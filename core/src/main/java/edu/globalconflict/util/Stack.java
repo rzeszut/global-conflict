@@ -1,12 +1,14 @@
 package edu.globalconflict.util;
 
+import java.util.Iterator;
+
 /**
  * Efficient array-based stack implementation.
  *
  * @author mateusz
  * @since 17.08.14
  */
-public final class Stack<T> {
+public final class Stack<T> implements Iterable<T> {
     private Object[] elements;
     private int size = 0;
 
@@ -41,39 +43,18 @@ public final class Stack<T> {
     }
 
     public void clear() {
-        for (; size > 0; --size) {
-            elements[size - 1] = null;
+        while (size > 0) {
+            elements[--size] = null;
         }
     }
 
     public void remove(T element) {
         final int index = indexOf(element);
-        elements[index] = null;
-        reshapeArray();
-    }
-
-    private void reshapeArray() {
-        int firstFreeIndex = -1;
-        int removedElements = 0;
-
-        for (int i = 0; i < size; ++i) {
-            final Object element = elements[i];
-
-            // if an element was removed
-            if (element == null) {
-                // if this is the first empty place, save it
-                if (firstFreeIndex == -1) {
-                    firstFreeIndex = i;
-                }
-                ++removedElements;
-            } else if (firstFreeIndex != -1) {
-                // if there was a free space before current element, move it there and free current location
-                elements[firstFreeIndex++] = element;
-                elements[i] = null;
-            }
+        if (index != -1) {
+            final int srcPos = index + 1;
+            System.arraycopy(elements, srcPos, elements, index, size - srcPos);
+            elements[--size] = null;
         }
-
-        size -= removedElements;
     }
 
     public int indexOf(T element) {
@@ -95,5 +76,25 @@ public final class Stack<T> {
 
     public int capacity() {
         return elements.length;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new StackIterator();
+    }
+
+    class StackIterator implements Iterator<T> {
+        private int currentIndex = Stack.this.size;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex > 0;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public T next() {
+            return (T) Stack.this.elements[--currentIndex];
+        }
     }
 }

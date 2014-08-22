@@ -50,18 +50,26 @@ public final class GameScreen implements Screen {
     public void show() {
         uiStage = new Stage();
 
-        final OrthographicCamera camera = new OrthographicCamera(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        camera.translate(0, Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT);
-        camera.update();
+        final OrthographicCamera camera = createCamera();
 
         engine = new Engine(entityManager);
         engine.registerProcessor(new PlayerClickProcessor());
         engine.registerProcessor(new TerritorySelectedProcessor());
         engine.registerProcessor(new TextureRenderProcessor(camera));
-        engine.registerProcessor(new DebugRenderProcessor(camera));
+        if (Constants.DEBUG) {
+            engine.registerProcessor(new DebugRenderProcessor(camera));
+        }
 
         final GameController controller = new GameController(camera, entityManager);
         Gdx.input.setInputProcessor(new GestureDetector(controller));
+    }
+
+    private OrthographicCamera createCamera() {
+        final OrthographicCamera camera = new OrthographicCamera(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        camera.translate((Constants.WORLD_WIDTH - Constants.SCREEN_WIDTH) * 0.5f,
+                (Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT) * 0.5f);
+        camera.update();
+        return camera;
     }
 
     @Override
