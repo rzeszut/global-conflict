@@ -75,50 +75,97 @@ public final class CreateWorldAction implements Runnable {
                 .newEntity()
                 .withTexture(GameAssets.middleEast)
                 .withPosition(1602, 733)
+                .withBounds(15, 5, 147, 8, 259, 62, 289, 44, 351, 68, 376, 175, 317, 277, 204, 330, 90, 123, 102, 61,
+                        23, 61)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.india)
                 .withPosition(1948, 806)
+                .withBounds(2, 49, 91, 3, 187, 46, 178, 78, 317, 127, 346, 103, 375, 117, 335, 195, 319, 179, 219, 290,
+                        246, 356, 229, 364, 188, 336, 140, 224, 72, 150, 25, 149, 33, 115)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.afghanistan)
                 .withPosition(1788, 473)
+                .withBounds(2, 64, 127, 50, 113, 18, 179, 1, 276, 37, 332, 99, 313, 116, 322, 140, 224, 196, 202, 189,
+                        171, 212, 72, 161, 44, 115, 63, 102)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.siam)
-                .withPosition(2279, 939)
+                .withPosition(2279, 860)
+                .withBounds(47, 0, 77, 72, 135, 56, 159, 75, 143, 102, 188, 167, 149, 216, 141, 300, 76, 224, 79, 172,
+                        4, 80)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.china)
                 .withPosition(2061, 671)
+                .withBounds(90, 1, 310, 127, 397, 71, 435, 101, 419, 116, 474, 133, 452, 160, 498, 222, 516, 281,
+                        508, 301, 400, 346, 305, 303, 277, 239, 226, 217, 204, 232, 71, 193, 79, 164, 3, 107, 57, 69)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.japan)
                 .withPosition(2602, 528)
+                .withBounds(0, 4, 9, 0, 58, 44, 113, 114, 115, 190, 39, 249, 22, 226, 27, 208, 90, 170, 64, 119, 71, 106)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.mongolia)
                 .withPosition(2154, 488)
+                .withBounds(7, 47, 85, 22, 197, 48, 271, 44, 262, 8, 310, 8, 405, 71, 426, 58, 429, 144, 414, 159,
+                        457, 202, 432, 209, 380, 154, 290, 124, 231, 172, 131, 139)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.ural)
                 .withPosition(1834, 352)
+                .withBounds(54, 0, 117, 5, 293, 153, 260, 163, 295, 202, 270, 222, 304, 246, 291, 264, 189, 180,
+                        58, 185, 0, 85, 38, 56, 35, 14)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.siberia)
                 .withPosition(1951, 331)
+                .withBounds(1, 44, 121, 1, 214, 23, 296, 175, 250, 190, 256, 228, 196, 254, 202, 271, 160, 263,
+                        182, 240, 148, 204, 179, 198)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.irkutsk)
                 .withPosition(2151, 328)
+                .withBounds(80, 0, 126, 49, 199, 44, 235, 77, 350, 91, 387, 159, 357, 150, 322, 112, 258, 113, 270, 145,
+                        134, 141, 88, 121, 75, 143, 5, 139, 62, 111, 56, 72, 105, 61, 75, 11)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.yakutsk)
                 .withPosition(2167, 252)
+                .withBounds(1, 1, 416, 39, 396, 79, 335, 101, 300, 141, 309, 171, 221, 163, 155, 120, 113, 136, 13, 42,
+                        33, 22)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor())
 
                 .newEntity()
                 .withTexture(GameAssets.kamchatka)
-                .withPosition(2469, 396);
+                .withPosition(2469, 396)
+                .withBounds(116, 4, 215, 1, 378, 49, 296, 98, 291, 192, 277, 193, 219, 130, 175, 106, 88, 108, 66, 153,
+                        154, 204, 147, 278, 117, 281, 108, 263, 130, 246, 110, 217, 90, 230, 57, 190, 68, 165, 0, 126)
+                .withComponent(new TerritorySelected())
+                .withComponent(new TintColor());
     }
 
     private void constructAfrica() {
