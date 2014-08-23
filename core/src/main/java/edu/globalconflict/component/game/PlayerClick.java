@@ -1,6 +1,6 @@
 package edu.globalconflict.component.game;
 
-import edu.globalconflict.entity.Component;
+import edu.globalconflict.entity.EventComponent;
 
 /**
  * Component representing player click event.
@@ -8,15 +8,11 @@ import edu.globalconflict.entity.Component;
  * @author mateusz
  * @since 15.08.14
  */
-public final class PlayerClick implements Component {
+public final class PlayerClick extends EventComponent {
     /**
      * Click coordinates.
      */
     public float x = 0, y = 0;
-    /**
-     * Is this a new event.
-     */
-    public boolean isNew = false;
 
     public void set(float x, float y) {
         this.x = x;

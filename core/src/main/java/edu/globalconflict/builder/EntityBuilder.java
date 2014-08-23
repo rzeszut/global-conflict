@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.globalconflict.Constants;
 import edu.globalconflict.component.*;
+import edu.globalconflict.component.territory.Territory;
 import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.entity.Component;
 import edu.globalconflict.entity.EntityManager;
@@ -69,6 +70,12 @@ public final class EntityBuilder {
         }
 
         manager.addComponent(entity, new TerritoryBounds(bounds));
+        return this;
+    }
+
+    public EntityBuilder withTerritory(String name, String... neighbors) {
+        manager.addComponent(entity, new Territory(name, neighbors));
+        manager.tagEntity(entity, Tag.Namespace.TERRITORY, name);
         return this;
     }
 }

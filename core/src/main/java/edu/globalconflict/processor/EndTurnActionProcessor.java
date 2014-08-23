@@ -1,29 +1,28 @@
-package edu.globalconflict.processor.strategy;
+package edu.globalconflict.processor;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import edu.globalconflict.Constants;
 import edu.globalconflict.component.game.CurrentPlayer;
-import edu.globalconflict.component.game.PlayerAction;
+import edu.globalconflict.component.game.EndTurnAction;
 import edu.globalconflict.entity.EntityManager;
-import edu.globalconflict.entity.Tag;
+import edu.globalconflict.entity.EventProcessor;
 
 import java.util.UUID;
 
 /**
  * @author mateusz
- * @since 22.08.14
+ * @since 23.08.14
  */
-public class EndTurnStrategy implements PlayerActionStrategy {
-    private Label currentPlayerLabel;
+public class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
+    private final Label currentPlayerLabel;
 
-    public EndTurnStrategy(Label currentPlayerLabel) {
+    public EndTurnActionProcessor(Label currentPlayerLabel) {
+        super(EndTurnAction.class);
         this.currentPlayerLabel = currentPlayerLabel;
     }
 
     @Override
-    public void process(EntityManager entityManager, PlayerAction.Action actionEvent) {
+    protected void processEvent(EntityManager entityManager, float delta, UUID gameEntity, EndTurnAction event) {
         // 1. change to next player
-        final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
         final CurrentPlayer currentPlayer = entityManager.getComponent(gameEntity, CurrentPlayer.class);
         currentPlayer.nextPlayer();
 

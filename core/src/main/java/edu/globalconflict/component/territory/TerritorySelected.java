@@ -1,6 +1,6 @@
 package edu.globalconflict.component.territory;
 
-import edu.globalconflict.entity.Component;
+import edu.globalconflict.entity.EventComponent;
 
 /**
  * Component representing territory's state of selection.
@@ -8,15 +8,11 @@ import edu.globalconflict.entity.Component;
  * @author mateusz
  * @since 16.08.14
  */
-public final class TerritorySelected implements Component {
+public final class TerritorySelected extends EventComponent {
     /**
      * Is territory selected.
      */
     public boolean selected = false;
-    /**
-     * Is this a new event -- a change of selection.
-     */
-    public boolean isNew = false;
 
     public void select(boolean select) {
         if (select) {

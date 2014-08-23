@@ -1,15 +1,22 @@
-package edu.globalconflict.processor.strategy;
+package edu.globalconflict.processor;
 
-import edu.globalconflict.component.game.PlayerAction;
+import edu.globalconflict.component.game.AttackAction;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.EventProcessor;
+
+import java.util.UUID;
 
 /**
  * @author mateusz
- * @since 22.08.14
+ * @since 23.08.14
  */
-public class AttackStrategy implements PlayerActionStrategy {
+public class AttackActionProcessor extends EventProcessor<AttackAction> {
+    public AttackActionProcessor() {
+        super(AttackAction.class);
+    }
+
     @Override
-    public void process(EntityManager entityManager, PlayerAction.Action actionEvent) {
+    protected void processEvent(EntityManager entityManager, float delta, UUID gameEntity, AttackAction event) {
         // 1. get two territories from stack
         // 2. validate:
         //   a. are they neighbours?

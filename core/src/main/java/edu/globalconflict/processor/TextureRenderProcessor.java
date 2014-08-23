@@ -29,7 +29,6 @@ public final class TextureRenderProcessor implements Processor {
 
     @Override
     public void process(EntityManager entityManager, float delta) {
-        camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 

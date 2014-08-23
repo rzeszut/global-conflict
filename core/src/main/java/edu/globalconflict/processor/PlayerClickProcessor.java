@@ -7,6 +7,7 @@ import edu.globalconflict.component.game.PlayerClick;
 import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.EventProcessor;
 import edu.globalconflict.entity.Processor;
 import edu.globalconflict.entity.Tag;
 
@@ -18,24 +19,14 @@ import java.util.UUID;
  * @author mateusz
  * @since 15.08.14
  */
-public final class PlayerClickProcessor implements Processor {
+public final class PlayerClickProcessor extends EventProcessor<PlayerClick> {
 
-    @Override
-    public void process(EntityManager entityManager, float delta) {
-        final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
-        final PlayerClick playerClick = entityManager.getComponent(gameEntity, PlayerClick.class);
-
-        // if player just clicked
-        if (playerClick.isNew) {
-            // select territories
-            selectTerritories(entityManager, playerClick);
-
-            // click processed
-            playerClick.isNew = false;
-        }
+    public PlayerClickProcessor() {
+        super(PlayerClick.class);
     }
 
-    private void selectTerritories(EntityManager entityManager, PlayerClick click) {
+    @Override
+    protected void processEvent(EntityManager entityManager, float delta, UUID gameEntity, PlayerClick click) {
         // iterate over selectable territories
         final Set<Map.Entry<UUID, TerritorySelected>> selectableEntities =
                 entityManager.getEntitiesWithComponentsForType(TerritorySelected.class);
@@ -53,7 +44,7 @@ public final class PlayerClickProcessor implements Processor {
 
             // select territory if clicked point is inside rectangle and inside polygon bounds
             final boolean selected = (x > 0 && y > 0) && (x < size.width && y < size.height)
-                            && Intersector.isPointInPolygon(bounds.bounds, 0, bounds.bounds.length, x, y);
+                    && Intersector.isPointInPolygon(bounds.bounds, 0, bounds.bounds.length, x, y);
             if (selected) {
                 territorySelected.select(true);
                 break;

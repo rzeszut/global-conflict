@@ -13,7 +13,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
-import edu.globalconflict.component.game.PlayerAction;
+import edu.globalconflict.component.game.AttackAction;
+import edu.globalconflict.component.game.EndTurnAction;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
@@ -27,8 +28,10 @@ public final class GameScreen implements Screen {
     private TheGame game;
 
     private Stage uiStage;
+
     private EntityManager entityManager;
     private Engine engine;
+    private OrthographicCamera camera;
 
     public GameScreen(TheGame game) {
         this.game = game;
@@ -38,6 +41,8 @@ public final class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        camera.update();
 
         // update UI
         uiStage.act(delta);
@@ -67,14 +72,17 @@ public final class GameScreen implements Screen {
         uiStage.addActor(currentPlayerLabel);
 
         // Game camera
-        final OrthographicCamera camera = createCamera();
+        camera = createCamera();
 
         // Register processors -- game logic
         engine = new Engine(entityManager);
-        engine.registerProcessor(new PlayerActionProcessor(currentPlayerLabel));
+        engine.registerProcessor(new AttackActionProcessor());
+        engine.registerProcessor(new TransferActionProcessor());
+        engine.registerProcessor(new EndTurnActionProcessor(currentPlayerLabel));
         engine.registerProcessor(new PlayerClickProcessor());
         engine.registerProcessor(new TerritorySelectedProcessor());
         engine.registerProcessor(new TextureRenderProcessor(camera));
+        engine.registerProcessor(new ArmyRenderProcessor(camera));
         if (Constants.DEBUG) {
             engine.registerProcessor(new DebugRenderProcessor(camera));
         }
@@ -87,13 +95,13 @@ public final class GameScreen implements Screen {
 
     private Table createGameUI() {
         final TextButton attackButton = new TextButton("Attack", MainAssets.skin);
-        attackButton.addListener(new ActionButtonListener(entityManager, PlayerAction.ATTACK));
+        attackButton.addListener(new ActionButtonListener<>(entityManager, AttackAction.class));
 
         final TextButton transferButton = new TextButton("Transfer", MainAssets.skin);
         // TODO: action listener -- open pop-up, select number (validated - min/max), fire player action event
 
         final TextButton endTurnButton = new TextButton("End turn", MainAssets.skin);
-        endTurnButton.addListener(new ActionButtonListener(entityManager, PlayerAction.END_TURN));
+        endTurnButton.addListener(new ActionButtonListener<>(entityManager, EndTurnAction.class));
 
         final Table table = new Table(MainAssets.skin);
         table.add(attackButton).width(80);

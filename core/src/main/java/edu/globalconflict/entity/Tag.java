@@ -43,8 +43,6 @@ public final class Tag {
 
     public static enum Namespace {
         GAME,
-        PLAYER,
-        TERRITORY,
-        ARMY_LOCATION
+        TERRITORY
     }
 }
