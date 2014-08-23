@@ -30,7 +30,7 @@ public final class GameAssets {
     public static TextureRegion southAfrica;
     public static TextureRegion congo;
     public static TextureRegion eastAfrica;
-    public static TextureRegion westAfrica;
+    public static TextureRegion northAfrica;
     public static TextureRegion egypt;
 
     public static TextureRegion iceland;
@@ -82,7 +82,7 @@ public final class GameAssets {
             southAfrica = world.findRegion("south-africa");
             congo = world.findRegion("congo");
             eastAfrica = world.findRegion("east-africa");
-            westAfrica = world.findRegion("west-africa");
+            northAfrica = world.findRegion("north-africa");
             egypt = world.findRegion("egypt");
 
             iceland = world.findRegion("iceland");

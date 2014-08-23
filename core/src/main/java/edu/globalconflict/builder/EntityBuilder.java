@@ -1,6 +1,5 @@
 package edu.globalconflict.builder;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.globalconflict.Constants;
 import edu.globalconflict.component.*;
@@ -42,11 +41,6 @@ public final class EntityBuilder {
     public EntityBuilder withTexture(TextureRegion region) {
         manager.addComponent(entity, new Texture(region));
         manager.addComponent(entity, new Size(region.getRegionWidth(), region.getRegionHeight()));
-        return this;
-    }
-
-    public EntityBuilder withTintColor(Color color) {
-        manager.addComponent(entity, new TintColor(color));
         return this;
     }
 

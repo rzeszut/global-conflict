@@ -12,10 +12,12 @@ import edu.globalconflict.entity.Tag;
 import java.util.UUID;
 
 /**
+ * TODO: refactor to include {@link com.badlogic.gdx.InputProcessor#scrolled(int)} method for camera zoom
+ *
  * @author mateusz
  * @since 12.08.14
  */
-public class GameController implements GestureDetector.GestureListener {
+public final class GameController implements GestureDetector.GestureListener {
     private OrthographicCamera camera;
     private EntityManager entityManager;
 
