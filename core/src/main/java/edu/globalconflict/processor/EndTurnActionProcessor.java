@@ -14,10 +14,12 @@ import java.util.UUID;
  */
 public class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
     private final Label currentPlayerLabel;
+    private final Label availableTroopsLabel;
 
-    public EndTurnActionProcessor(Label currentPlayerLabel) {
+    public EndTurnActionProcessor(Label currentPlayerLabel, Label availableTroopsLabel) {
         super(EndTurnAction.class);
         this.currentPlayerLabel = currentPlayerLabel;
+        this.availableTroopsLabel = availableTroopsLabel;
     }
 
     @Override
@@ -31,7 +33,11 @@ public class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
         currentPlayerLabel.setText(currentPlayer.currentPlayer.name);
 
         // 3. unfreeze player territories (armies, actually)
+
         // 4. calculate available troops for player -- game logic
+
         // 5. update available troops label
+        availableTroopsLabel.setColor(currentPlayer.currentPlayer.color);
+        availableTroopsLabel.setText("Available troops: " + currentPlayer.currentPlayer.availableTroops);
     }
 }

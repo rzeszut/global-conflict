@@ -40,7 +40,8 @@ public final class CreateWorldAction implements Runnable, Constants {
 
         final List<Player> players = Arrays.asList(
                 new Player("Player 1", Color.BLUE),
-                new Player("Player 2", Color.RED)
+                new Player("Player 2", Color.RED),
+                new Player("Player 3", Color.GREEN)
         );
         assignTerritoriesToPlayers(players);
 

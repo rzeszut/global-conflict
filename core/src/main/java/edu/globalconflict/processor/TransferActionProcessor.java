@@ -25,5 +25,6 @@ public class TransferActionProcessor extends EventProcessor<TransferAction> {
         //   c. same player as current player
         // 4. perform transfer -- game logic
         // 5. update available troops label
+        // 6. finally -- clear selected territories stack
     }
 }

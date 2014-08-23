@@ -25,5 +25,6 @@ public class AttackActionProcessor extends EventProcessor<AttackAction> {
         // 3. perform attack -- game logic
         // 4. if succeeded, change army owner, and so on (or add a new army if empty territory was attacked)
         // 5. if succeeded, freeze army -- it cannot be transferred, cannot attack till the next turn
+        // 6. finally -- clear selected territories stack
     }
 }

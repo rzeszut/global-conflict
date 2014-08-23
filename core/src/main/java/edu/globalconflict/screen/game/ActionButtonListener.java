@@ -23,9 +23,9 @@ public class ActionButtonListener<A extends EventComponent> extends InputListene
     }
 
     @Override
-    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+    public final boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
         final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
-        final A playerAction = entityManager.getComponent(gameEntity, actionClass);;
+        final A playerAction = entityManager.getComponent(gameEntity, actionClass);
         processAction(playerAction);
         return true;
     }
