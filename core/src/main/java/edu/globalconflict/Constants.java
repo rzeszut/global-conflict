@@ -62,4 +62,8 @@ public interface Constants {
     String INDONESIA = "Indonesia";
     String NEW_GUINEA = "New Guinea";
     String WESTERN_AUSTRALIA = "Western Australia";
+
+    /* Error messages */
+    String AT_LEAST_ONE_TERRITORY_SELECTED = "You have to select a territory";
+    String TRANSFER_FAILED = "You cannot perform transfer on this territory";
 }

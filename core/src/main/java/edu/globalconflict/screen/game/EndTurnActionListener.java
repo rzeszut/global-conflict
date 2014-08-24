@@ -1,7 +1,8 @@
 package edu.globalconflict.screen.game;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.component.game.EndTurnAction;
 import edu.globalconflict.entity.EntityManager;
@@ -23,7 +24,7 @@ public final class EndTurnActionListener extends ActionButtonListener<EndTurnAct
     @Override
     protected void processAction(EndTurnAction action) {
         window.action = action;
-        window.show(stage);
+        window.show(stage, null);
     }
 
     class EndTurnWindow extends Dialog {
@@ -38,13 +39,14 @@ public final class EndTurnActionListener extends ActionButtonListener<EndTurnAct
             setMovable(false);
             setWidth(200);
             setHeight(100);
+            setCenterPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2);
         }
 
         protected void result (Object object) {
             if (object == ButtonClicked.OK) {
                 action.isNew = true;
             }
-            hide();
+            hide(null);
         }
     }
 }

@@ -4,10 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 import edu.globalconflict.Constants;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.builder.EntityBuilder;
-import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.TintColor;
-import edu.globalconflict.component.game.*;
+import edu.globalconflict.component.game.AttackAction;
+import edu.globalconflict.component.game.CurrentPlayer;
+import edu.globalconflict.component.game.EndTurnAction;
+import edu.globalconflict.component.game.TransferAction;
+import edu.globalconflict.component.io.*;
+import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.component.territory.Territory;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
@@ -52,14 +56,19 @@ public final class CreateWorldAction implements Runnable, Constants {
 
         entityBuilder
                 .newEntity(Tag.Namespace.GAME, Constants.GAME_ENTITY)
-                .withComponent(new CurrentPlayer(players))
-                .withComponent(new SelectedTerritoriesStack())
 
-                // game events
+                // player input/ouput
                 .withComponent(new PlayerClick())
+                .withComponent(new AttackButtonClick())
+                .withComponent(new TransferButtonClick())
+                .withComponent(new SelectedTerritoriesStack())
+                .withComponent(new GameError())
+
+                // game components
                 .withComponent(new AttackAction())
                 .withComponent(new TransferAction())
-                .withComponent(endTurnAction);
+                .withComponent(endTurnAction)
+                .withComponent(new CurrentPlayer(players));
     }
 
     private void initializeTerritories() {

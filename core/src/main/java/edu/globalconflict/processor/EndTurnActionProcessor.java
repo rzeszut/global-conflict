@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author mateusz
  * @since 23.08.14
  */
-public class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
+public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
     private final Label currentPlayerLabel;
     private final Label availableTroopsLabel;
 
@@ -32,12 +32,17 @@ public class EndTurnActionProcessor extends EventProcessor<EndTurnAction> {
         currentPlayerLabel.setColor(currentPlayer.currentPlayer.color);
         currentPlayerLabel.setText(currentPlayer.currentPlayer.name);
 
+        // TODO
         // 3. unfreeze player territories (armies, actually)
 
-        // 4. calculate available troops for player -- game logic
+        // 4. calculate available troops for player
+        //   a. territories
+        //   b. completed continents
 
         // 5. update available troops label
         availableTroopsLabel.setColor(currentPlayer.currentPlayer.color);
         availableTroopsLabel.setText("Available troops: " + currentPlayer.currentPlayer.availableTroops);
+
+        // 6. clear selected territories
     }
 }

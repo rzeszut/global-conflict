@@ -14,9 +14,14 @@ public final class TerritorySelected extends EventComponent {
      */
     public boolean selected = false;
 
-    public void select(boolean select) {
-        if (select) {
-            selected = !selected;
+    public void toggle() {
+        selected = !selected;
+        isNew = true;
+    }
+
+    public void unselect() {
+        if (selected) {
+            selected = false;
             isNew = true;
         }
     }

@@ -11,7 +11,7 @@ import edu.globalconflict.entity.Component;
  */
 public final class Player implements Component {
     /**
-     * Player name.
+     * Player name -- identifies player.
      */
     public final String name;
     /**
@@ -38,16 +38,11 @@ public final class Player implements Component {
         }
 
         final Player player = (Player) o;
-        return availableTroops == player.availableTroops &&
-                color.equals(player.color) &&
-                name.equals(player.name);
+        return name.equals(player.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + color.hashCode();
-        result = 31 * result + availableTroops;
-        return result;
+        return name.hashCode();
     }
 }

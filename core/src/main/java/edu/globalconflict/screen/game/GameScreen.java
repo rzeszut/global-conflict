@@ -7,13 +7,16 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
-import edu.globalconflict.TheGame;
-import edu.globalconflict.component.game.AttackAction;
+import edu.globalconflict.component.io.AttackButtonClick;
+import edu.globalconflict.component.io.TransferButtonClick;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
@@ -24,8 +27,6 @@ import edu.globalconflict.processor.*;
  * @since 10.08.14
  */
 public final class GameScreen implements Screen {
-    private TheGame game;
-
     private Stage uiStage;
     private Label currentPlayerLabel;
     private Label availableTroopsLabel;
@@ -33,10 +34,6 @@ public final class GameScreen implements Screen {
     private EntityManager entityManager;
     private Engine engine;
     private OrthographicCamera camera;
-
-    public GameScreen(TheGame game) {
-        this.game = game;
-    }
 
     @Override
     public void render(float delta) {
@@ -66,16 +63,27 @@ public final class GameScreen implements Screen {
         createButtonsUI();
         createLabelsUI();
 
+        final TransferDialog transferDialog = new TransferDialog(uiStage, entityManager);
+        final ErrorDialog errorDialog = new ErrorDialog(uiStage);
+
         // Game camera
         createCamera();
 
         // Register processors -- game logic
         engine = new Engine(entityManager);
-        engine.registerProcessor(new AttackActionProcessor());
-        engine.registerProcessor(new TransferActionProcessor());
-        engine.registerProcessor(new EndTurnActionProcessor(currentPlayerLabel, availableTroopsLabel));
+        // player input/output
+        engine.registerProcessor(new AttackButtonClickProcessor());
+        engine.registerProcessor(new TransferButtonClickProcessor(transferDialog));
         engine.registerProcessor(new PlayerClickProcessor());
+        engine.registerProcessor(new GameErrorProcessor(errorDialog));
         engine.registerProcessor(new TerritorySelectedProcessor());
+
+        // game logic
+        engine.registerProcessor(new AttackActionProcessor());
+        engine.registerProcessor(new TransferActionProcessor(availableTroopsLabel));
+        engine.registerProcessor(new EndTurnActionProcessor(currentPlayerLabel, availableTroopsLabel));
+
+        // rendering
         engine.registerProcessor(new TextureRenderProcessor(camera));
         engine.registerProcessor(new ArmyRenderProcessor(camera));
         if (Constants.DEBUG) {
@@ -105,10 +113,10 @@ public final class GameScreen implements Screen {
 
     private void createButtonsUI() {
         final TextButton attackButton = new TextButton("Attack", MainAssets.skin);
-        attackButton.addListener(new ActionButtonListener<>(entityManager, AttackAction.class));
+        attackButton.addListener(new ActionButtonListener<>(entityManager, AttackButtonClick.class));
 
         final TextButton transferButton = new TextButton("Transfer", MainAssets.skin);
-        transferButton.addListener(new TransferActionListener(entityManager, uiStage));
+        transferButton.addListener(new ActionButtonListener<>(entityManager, TransferButtonClick.class));
 
         final TextButton endTurnButton = new TextButton("End turn", MainAssets.skin);
         endTurnButton.addListener(new EndTurnActionListener(entityManager, uiStage));

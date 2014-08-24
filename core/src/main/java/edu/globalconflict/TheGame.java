@@ -3,9 +3,9 @@ package edu.globalconflict;
 
 import com.badlogic.gdx.Game;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.screen.MainMenuScreen;
 import edu.globalconflict.screen.game.GameScreen;
 import edu.globalconflict.screen.loading.LoadingGameScreen;
-import edu.globalconflict.screen.MainMenuScreen;
 
 public final class TheGame extends Game {
     public MainMenuScreen mainMenuScreen;
@@ -18,7 +18,7 @@ public final class TheGame extends Game {
 
         mainMenuScreen = new MainMenuScreen(this);
         loadingGameScreen = new LoadingGameScreen(this);
-        gameScreen = new GameScreen(this);
+        gameScreen = new GameScreen();
 
         setScreen(mainMenuScreen);
     }

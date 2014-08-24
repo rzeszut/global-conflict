@@ -5,7 +5,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import edu.globalconflict.Constants;
-import edu.globalconflict.component.game.PlayerClick;
+import edu.globalconflict.component.io.PlayerClick;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
 

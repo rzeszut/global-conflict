@@ -1,9 +1,9 @@
 package edu.globalconflict.processor;
 
 import edu.globalconflict.Constants;
-import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.component.TintColor;
-import edu.globalconflict.component.game.SelectedTerritoriesStack;
+import edu.globalconflict.component.io.SelectedTerritoriesStack;
+import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Processor;
 import edu.globalconflict.entity.Tag;

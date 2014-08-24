@@ -1,4 +1,4 @@
-package edu.globalconflict.component.game;
+package edu.globalconflict.component.io;
 
 import edu.globalconflict.entity.EventComponent;
 

@@ -1,15 +1,13 @@
 package edu.globalconflict.processor;
 
 import com.badlogic.gdx.math.Intersector;
-import edu.globalconflict.Constants;
-import edu.globalconflict.component.*;
-import edu.globalconflict.component.game.PlayerClick;
+import edu.globalconflict.component.Position;
+import edu.globalconflict.component.Size;
+import edu.globalconflict.component.io.PlayerClick;
 import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.EventProcessor;
-import edu.globalconflict.entity.Processor;
-import edu.globalconflict.entity.Tag;
 
 import java.util.Map;
 import java.util.Set;
@@ -46,7 +44,7 @@ public final class PlayerClickProcessor extends EventProcessor<PlayerClick> {
             final boolean selected = (x > 0 && y > 0) && (x < size.width && y < size.height)
                     && Intersector.isPointInPolygon(bounds.bounds, 0, bounds.bounds.length, x, y);
             if (selected) {
-                territorySelected.select(true);
+                territorySelected.toggle();
                 break;
             }
         }
