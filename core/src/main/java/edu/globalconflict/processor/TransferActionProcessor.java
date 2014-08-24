@@ -17,11 +17,13 @@ public class TransferActionProcessor extends EventProcessor<TransferAction> {
 
     @Override
     protected void processEvent(EntityManager entityManager, float delta, UUID gameEntity, TransferAction event) {
+        System.out.println("Transferred " + event.transferredTroops + " troops");
         // 1. get one territory from stack
         // 2. get current player
         // 3. validate:
         //   a. transfer amount
         //   b. if territory (army, actually) is frozen
+        //      * TODO: should freezing validation actually happen here? or in UI?
         //   c. same player as current player
         // 4. perform transfer -- game logic
         // 5. update available troops label

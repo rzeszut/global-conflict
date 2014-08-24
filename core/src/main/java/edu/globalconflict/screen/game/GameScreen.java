@@ -14,7 +14,6 @@ import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
 import edu.globalconflict.component.game.AttackAction;
-import edu.globalconflict.component.game.EndTurnAction;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
@@ -64,8 +63,8 @@ public final class GameScreen implements Screen {
     public void show() {
         // Game UI
         uiStage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        createButtonsUI(uiStage);
-        createLabelsUI(uiStage);
+        createButtonsUI();
+        createLabelsUI();
 
         // Game camera
         createCamera();
@@ -89,7 +88,7 @@ public final class GameScreen implements Screen {
         Gdx.input.setInputProcessor(inputProcessor);
     }
 
-    private void createLabelsUI(Stage uiStage) {
+    private void createLabelsUI() {
         currentPlayerLabel = new Label("", MainAssets.skin);
         availableTroopsLabel = new Label("", MainAssets.skin);
 
@@ -104,16 +103,15 @@ public final class GameScreen implements Screen {
         uiStage.addActor(vbox);
     }
 
-    private void createButtonsUI(Stage uiStage) {
+    private void createButtonsUI() {
         final TextButton attackButton = new TextButton("Attack", MainAssets.skin);
         attackButton.addListener(new ActionButtonListener<>(entityManager, AttackAction.class));
 
         final TextButton transferButton = new TextButton("Transfer", MainAssets.skin);
-        // TODO: action listener -- open pop-up, select number (validated - min/max), fire player action event
+        transferButton.addListener(new TransferActionListener(entityManager, uiStage));
 
         final TextButton endTurnButton = new TextButton("End turn", MainAssets.skin);
-        final EndTurnActionListener endTurnActionListener = new EndTurnActionListener(entityManager);
-        endTurnButton.addListener(endTurnActionListener);
+        endTurnButton.addListener(new EndTurnActionListener(entityManager, uiStage));
 
         final Table table = new Table(MainAssets.skin);
         table.add(attackButton).width(80);
@@ -126,7 +124,6 @@ public final class GameScreen implements Screen {
         table.pack();
 
         uiStage.addActor(table);
-        uiStage.addActor(endTurnActionListener.window);
     }
 
     private void createCamera() {

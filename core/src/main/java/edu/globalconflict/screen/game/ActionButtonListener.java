@@ -14,7 +14,7 @@ import java.util.UUID;
  * @since 22.08.14
  */
 public class ActionButtonListener<A extends EventComponent> extends InputListener {
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
     private final Class<A> actionClass;
 
     public ActionButtonListener(EntityManager entityManager, Class<A> actionClass) {
