@@ -1,7 +1,7 @@
 package edu.globalconflict.screen.game;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.globalconflict.Constants;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.EventComponent;
@@ -13,7 +13,7 @@ import java.util.UUID;
  * @author mateusz
  * @since 22.08.14
  */
-public class ActionButtonListener<A extends EventComponent> extends InputListener {
+public class ActionButtonListener<A extends EventComponent> extends ClickListener {
     protected final EntityManager entityManager;
     private final Class<A> actionClass;
 
@@ -23,11 +23,10 @@ public class ActionButtonListener<A extends EventComponent> extends InputListene
     }
 
     @Override
-    public final boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+    public void clicked(InputEvent event, float x, float y) {
         final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
         final A playerAction = entityManager.getComponent(gameEntity, actionClass);
         processAction(playerAction);
-        return true;
     }
 
     /**

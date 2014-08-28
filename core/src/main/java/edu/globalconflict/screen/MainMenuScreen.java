@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import edu.globalconflict.Constants;
@@ -37,7 +37,7 @@ public final class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().setWorldSize(width, height);
+//        stage.getViewport().setWorldSize(width, height);
     }
 
     @Override
@@ -47,31 +47,26 @@ public final class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // widgets
-        final Table table = new Table(MainAssets.skin);
-
         final TextButton startGameButton = new TextButton("Start game", MainAssets.skin);
-        final TextButton optionsButton = new TextButton("Options", MainAssets.skin);
         final TextButton exitButton = new TextButton("Exit", MainAssets.skin);
 
-        // widgets config
-        startGameButton.addListener(new InputListener() {
+        // callbacks
+        startGameButton.addListener(new ClickListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.startLoadingGameAssets();
-                return true;
+            public void clicked(InputEvent event, float x, float y) {
+                game.goToPlayerSelection();
             }
         });
-        exitButton.addListener(new InputListener() {
+        exitButton.addListener(new ClickListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
-                return true;
             }
         });
 
+        // layout
+        final Table table = new Table(MainAssets.skin);
         table.add(startGameButton).width(150).height(50);
-        table.row();
-        table.add(optionsButton).width(150).height(50).padTop(10);
         table.row();
         table.add(exitButton).width(150).height(50).padTop(10);
         table.setFillParent(true);

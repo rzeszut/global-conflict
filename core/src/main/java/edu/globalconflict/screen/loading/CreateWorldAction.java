@@ -27,9 +27,12 @@ public final class CreateWorldAction implements Runnable, Constants {
     private final EntityManager entityManager;
     private final EntityBuilder entityBuilder;
 
-    public CreateWorldAction(EntityManager entityManager) {
+    private final List<String> playerNames;
+
+    public CreateWorldAction(EntityManager entityManager, List<String> playerNames) {
         this.entityManager = entityManager;
         this.entityBuilder = new EntityBuilder(entityManager);
+        this.playerNames = playerNames;
     }
 
     @Override
@@ -42,14 +45,10 @@ public final class CreateWorldAction implements Runnable, Constants {
         constructAustralia();
         initializeTerritories();
 
-        // TODO: create player choosing screen
-        final List<Player> players = Arrays.asList(
-                new Player("Player 1", Color.BLUE),
-                new Player("Player 2", Color.RED),
-                new Player("Player 3", Color.GREEN)
-        );
+        final List<Player> players = createPlayers();
         assignTerritoriesToPlayers(players);
 
+        // TODO: get rid of this beginning action
         // END TURN action at the beginning of the game sets some labels, adds troops and so on.
         // This is pretty much required setup.
         final EndTurnAction endTurnAction = new EndTurnAction();
@@ -70,6 +69,20 @@ public final class CreateWorldAction implements Runnable, Constants {
                 .withComponent(new TransferAction())
                 .withComponent(endTurnAction)
                 .withComponent(new CurrentPlayer(players));
+    }
+
+    private List<Player> createPlayers() {
+        final List<Player> players = new ArrayList<>(playerNames.size());
+
+        final Iterator<String> nameIterator = playerNames.iterator();
+        final Iterator<Color> colorIterator = Constants.PLAYER_COLORS.iterator();
+
+        while (nameIterator.hasNext() && colorIterator.hasNext()) {
+            final Player player = new Player(nameIterator.next(), colorIterator.next());
+            players.add(player);
+        }
+
+        return players;
     }
 
     private void initializeTerritories() {

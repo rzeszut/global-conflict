@@ -12,7 +12,8 @@ import edu.globalconflict.GameAssets;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
 import edu.globalconflict.entity.EntityManager;
-import edu.globalconflict.screen.loading.CreateWorldAction;
+
+import java.util.List;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -25,6 +26,8 @@ public final class LoadingGameScreen implements Screen {
 
     private TheGame game;
     private Stage stage;
+
+    private List<String> playerNames;
 
     public LoadingGameScreen(TheGame game) {
         this.game = game;
@@ -59,7 +62,7 @@ public final class LoadingGameScreen implements Screen {
         stage.addAction(sequence(
                 fadeIn(FADE_DELAY),
                 run(new LoadGameAssetsAction()),
-                run(new CreateWorldAction(entityManager)),
+                run(new CreateWorldAction(entityManager, playerNames)),
                 fadeOut(FADE_DELAY),
                 run(new StartGameAction(entityManager))
         ));
@@ -82,6 +85,10 @@ public final class LoadingGameScreen implements Screen {
         stage.dispose();
     }
 
+    public void setPlayerNames(List<String> playerNames) {
+        this.playerNames = playerNames;
+    }
+
     private static final class LoadGameAssetsAction implements Runnable {
         @Override
         public void run() {
@@ -98,7 +105,7 @@ public final class LoadingGameScreen implements Screen {
 
         @Override
         public void run() {
-            game.startGame(entityManager);
+            game.goToGame(entityManager);
         }
     }
 }
