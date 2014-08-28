@@ -1,13 +1,19 @@
 package edu.globalconflict.builder;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import edu.globalconflict.Constants;
-import edu.globalconflict.component.*;
+import edu.globalconflict.component.Continent;
+import edu.globalconflict.component.Position;
+import edu.globalconflict.component.Size;
+import edu.globalconflict.component.Texture;
+import edu.globalconflict.component.territory.PolygonCentroid;
 import edu.globalconflict.component.territory.Territory;
 import edu.globalconflict.component.territory.TerritoryBounds;
 import edu.globalconflict.entity.Component;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
+import edu.globalconflict.util.MathUtil;
 
 import java.util.UUID;
 
@@ -64,12 +70,21 @@ public final class EntityBuilder {
         }
 
         manager.addComponent(entity, new TerritoryBounds(bounds));
+
+        final Vector2 centroid = MathUtil.calculatePolygonCentroid(bounds);
+        manager.addComponent(entity, new PolygonCentroid(centroid.x, centroid.y));
+
         return this;
     }
 
     public EntityBuilder withTerritory(String name, String... neighbors) {
         manager.addComponent(entity, new Territory(name, neighbors));
         manager.tagEntity(entity, Tag.Namespace.TERRITORY, name);
+        return this;
+    }
+
+    public EntityBuilder withContinent(int points, String... territories) {
+        manager.addComponent(entity, new Continent(points, territories));
         return this;
     }
 }

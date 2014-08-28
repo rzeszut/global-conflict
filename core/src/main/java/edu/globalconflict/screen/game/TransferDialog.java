@@ -30,6 +30,7 @@ public final class TransferDialog extends Dialog {
 
         final Label label = new Label("Select number of troops to transfer:", MainAssets.skin);
         slider = new Slider(0, 1, 1, false, MainAssets.skin);
+        // TODO: label showing currently chosen value
 
         getContentTable().add(label).row();
         getContentTable().add(slider).width(250);

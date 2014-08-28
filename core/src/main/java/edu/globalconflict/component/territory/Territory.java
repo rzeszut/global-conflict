@@ -12,11 +12,11 @@ public final class Territory implements Component {
     /**
      * Name of the territory.
      */
-    public String name;
+    public final String name;
     /**
      * A list of its neighbors (names).
      */
-    public String[] neighbors;
+    public final String[] neighbors;
 
     public Territory(String name, String[] neighbors) {
         this.name = name;

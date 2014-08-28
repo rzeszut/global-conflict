@@ -1,11 +1,11 @@
 package edu.globalconflict.processor;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.game.TransferAction;
 import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.EventProcessor;
+import edu.globalconflict.screen.game.AvailableTroopsLabel;
 
 import java.util.UUID;
 
@@ -14,9 +14,9 @@ import java.util.UUID;
  * @since 23.08.14
  */
 public final class TransferActionProcessor extends EventProcessor<TransferAction> {
-    public final Label availableTroopsLabel;
+    public final AvailableTroopsLabel availableTroopsLabel;
 
-    public TransferActionProcessor(Label availableTroopsLabel) {
+    public TransferActionProcessor(AvailableTroopsLabel availableTroopsLabel) {
         super(TransferAction.class);
         this.availableTroopsLabel = availableTroopsLabel;
     }
@@ -31,6 +31,6 @@ public final class TransferActionProcessor extends EventProcessor<TransferAction
         currentPlayer.currentPlayer.availableTroops -= event.transferredTroops;
 
         // 2. update available troops label
-        availableTroopsLabel.setText("Available troops: " + currentPlayer.currentPlayer.availableTroops);
+        availableTroopsLabel.update(currentPlayer);
     }
 }

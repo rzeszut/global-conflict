@@ -27,7 +27,7 @@ import edu.globalconflict.processor.*;
 public final class GameScreen implements Screen {
     private Stage uiStage;
     private Label currentPlayerLabel;
-    private Label availableTroopsLabel;
+    private AvailableTroopsLabel availableTroopsLabel;
 
     private EntityManager entityManager;
     private Engine engine;
@@ -96,7 +96,7 @@ public final class GameScreen implements Screen {
 
     private void createLabelsUI() {
         currentPlayerLabel = new Label("", MainAssets.skin);
-        availableTroopsLabel = new Label("", MainAssets.skin);
+        availableTroopsLabel = new AvailableTroopsLabel();
 
         final Table table = new Table(MainAssets.skin);
         table.add(currentPlayerLabel).width(200).height(20);

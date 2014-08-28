@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.Position;
-import edu.globalconflict.component.Size;
 import edu.globalconflict.component.territory.Army;
+import edu.globalconflict.component.territory.PolygonCentroid;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Processor;
 
@@ -43,13 +43,10 @@ public final class ArmyRenderProcessor implements Processor {
             final Army army = armyEntity.getValue();
             final Player player = entityManager.getComponent(entity, Player.class);
 
-            // TODO: replace with pre-calculated centroid
-            // http://stackoverflow.com/questions/2792443/finding-the-centroid-of-a-polygon
-            // http://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon
             final Position position = entityManager.getComponent(entity, Position.class);
-            final Size size = entityManager.getComponent(entity, Size.class);
-            final float x = position.x + size.width / 2;
-            final float y = position.y + size.height / 2;
+            final PolygonCentroid centroid = entityManager.getComponent(entity, PolygonCentroid.class);
+            final float x = position.x + centroid.x;
+            final float y = position.y + centroid.y;
 
             bitmapFont.setColor(player.color);
             bitmapFont.draw(batch, army.getText(), x, y);

@@ -1,5 +1,10 @@
 package edu.globalconflict;
 
+import com.badlogic.gdx.graphics.Color;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author mateusz
  * @since 10.08.14
@@ -18,6 +23,17 @@ public interface Constants {
 
     /* Debug mode */
     boolean DEBUG = false;
+
+    /* Player data */
+    int MAX_PLAYERS = 6;
+    List<Color> PLAYER_COLORS = Arrays.asList(
+            Color.RED,
+            Color.GREEN,
+            Color.BLUE,
+            Color.ORANGE,
+            Color.MAGENTA,
+            Color.WHITE
+    );
 
     /* Territory names */
     String ALASKA = "Alaska";

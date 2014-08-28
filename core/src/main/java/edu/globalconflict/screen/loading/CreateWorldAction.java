@@ -42,6 +42,7 @@ public final class CreateWorldAction implements Runnable, Constants {
         constructAustralia();
         initializeTerritories();
 
+        // TODO: create player choosing screen
         final List<Player> players = Arrays.asList(
                 new Player("Player 1", Color.BLUE),
                 new Player("Player 2", Color.RED),
@@ -105,6 +106,9 @@ public final class CreateWorldAction implements Runnable, Constants {
     private void constructAustralia() {
         entityBuilder
                 .newEntity()
+                .withContinent(2, WESTERN_AUSTRALIA, EASTERN_AUSTRALIA, NEW_GUINEA, INDONESIA)
+
+                .newEntity()
                 .withTerritory(WESTERN_AUSTRALIA, EASTERN_AUSTRALIA, INDONESIA, NEW_GUINEA)
                 .withTexture(GameAssets.westernAustralia)
                 .withPosition(2474, 1300)
@@ -134,6 +138,10 @@ public final class CreateWorldAction implements Runnable, Constants {
 
     private void constructAsia() {
         entityBuilder
+                .newEntity()
+                .withContinent(7, MIDDLE_EAST, INDIA, AFGHANISTAN, SIAM, CHINA, JAPAN, MONGOLIA, URAL, SIBERIA, IRKUTSK,
+                        YAKUTSK, KAMCHATKA)
+
                 .newEntity()
                 .withTerritory(MIDDLE_EAST, EAST_AFRICA, EGYPT, SOUTHERN_EUROPE, UKRAINE, AFGHANISTAN, INDIA)
                 .withTexture(GameAssets.middleEast)
@@ -221,6 +229,9 @@ public final class CreateWorldAction implements Runnable, Constants {
     private void constructAfrica() {
         entityBuilder
                 .newEntity()
+                .withContinent(3, MADAGASCAR, SOUTH_AFRICA, CONGO, EAST_AFRICA, NORTH_AFRICA, EGYPT)
+
+                .newEntity()
                 .withTerritory(MADAGASCAR, SOUTH_AFRICA, EAST_AFRICA)
                 .withTexture(GameAssets.madagascar)
                 .withPosition(1787, 1161)
@@ -262,6 +273,10 @@ public final class CreateWorldAction implements Runnable, Constants {
 
     private void constructEurope() {
         entityBuilder
+                .newEntity()
+                .withContinent(5, ICELAND, GREAT_BRITAIN, WESTERN_EUROPE, SOUTHERN_EUROPE, NORTHERN_EUROPE, SCANDINAVIA,
+                        UKRAINE)
+
                 .newEntity()
                 .withTerritory(ICELAND, GREENLAND, GREAT_BRITAIN, SCANDINAVIA)
                 .withTexture(GameAssets.iceland)
@@ -310,6 +325,9 @@ public final class CreateWorldAction implements Runnable, Constants {
     private void constructSouthAmerica() {
         entityBuilder
                 .newEntity()
+                .withContinent(2, VENEZUELA, BRAZIL, PERU, ARGENTINA)
+
+                .newEntity()
                 .withTerritory(VENEZUELA, CENTRAL_AMERICA, PERU, BRAZIL)
                 .withTexture(GameAssets.venezuela)
                 .withPosition(533, 925)
@@ -337,6 +355,10 @@ public final class CreateWorldAction implements Runnable, Constants {
 
     private void constructNorthAmerica() {
         entityBuilder
+                .newEntity()
+                .withContinent(5, ALASKA, NORTHWEST_TERRITORY, ALBERTA, ONTARIO, QUEBEC, EASTERN_US, WESTERN_US,
+                        CENTRAL_AMERICA)
+
                 .newEntity()
                 .withTerritory(ALASKA, KAMCHATKA, ALBERTA, NORTHWEST_TERRITORY)
                 .withTexture(GameAssets.alaska)

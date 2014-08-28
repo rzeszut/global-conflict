@@ -54,9 +54,7 @@ public final class AttackActionProcessor extends EventProcessor<AttackAction> {
             attackingArmy.troops = 1;
 
             // transfer ownership of the territory, set color
-            final Player winner = entityManager.getComponent(event.attackingTerritory, Player.class);
-            entityManager.addComponent(event.defendingTerritory, winner);
-            entityManager.getComponent(event.defendingTerritory, TintColor.class).color.set(winner.color);
+            changeOwner(entityManager, event.attackingTerritory, event.defendingTerritory);
 
             // freeze newly won territory
             defendingArmy.frozen = true;
@@ -69,9 +67,13 @@ public final class AttackActionProcessor extends EventProcessor<AttackAction> {
             defendingArmy.troops = Math.max(1, defendingArmy.troops - 1);
 
             // transfer ownership of the territory, set color
-            final Player winner = entityManager.getComponent(event.defendingTerritory, Player.class);
-            entityManager.addComponent(event.attackingTerritory, winner);
-            entityManager.getComponent(event.attackingTerritory, TintColor.class).color.set(winner.color);
+            changeOwner(entityManager, event.defendingTerritory, event.attackingTerritory);
         }
+    }
+
+    private void changeOwner(EntityManager entityManager, UUID winnerTerritory, UUID loserTerritory) {
+        final Player winner = entityManager.getComponent(winnerTerritory, Player.class);
+        entityManager.addComponent(loserTerritory, winner);
+        entityManager.getComponent(loserTerritory, TintColor.class).color.set(winner.color);
     }
 }
