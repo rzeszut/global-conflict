@@ -22,4 +22,13 @@ public final class Territory implements Component {
         this.name = name;
         this.neighbors = neighbors;
     }
+
+    public boolean isNeighbor(String n) {
+        for (String neighbor : neighbors) {
+            if (neighbor.equals(n)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

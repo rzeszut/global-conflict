@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import edu.globalconflict.MainAssets;
-import edu.globalconflict.component.territory.Army;
+import edu.globalconflict.GameAssets;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.Position;
 import edu.globalconflict.component.Size;
+import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Processor;
 
@@ -23,8 +23,7 @@ import java.util.UUID;
 public final class ArmyRenderProcessor implements Processor {
     private OrthographicCamera camera;
     private Batch batch;
-    // TODO: create separate font for in-game use -- a bigger one, that's certain -- and put it into GameAssets
-    private BitmapFont bitmapFont = MainAssets.skin.getFont("default-font");
+    private BitmapFont bitmapFont = GameAssets.armyFont;
 
     public ArmyRenderProcessor(OrthographicCamera camera) {
         this.camera = camera;

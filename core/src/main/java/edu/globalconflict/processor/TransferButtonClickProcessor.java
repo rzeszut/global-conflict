@@ -18,7 +18,7 @@ import java.util.UUID;
  * @author mateusz
  * @since 24.08.14
  */
-public final class TransferButtonClickProcessor extends EventProcessor<TransferButtonClick> {
+public final class TransferButtonClickProcessor extends EventProcessor<TransferButtonClick> implements Constants {
     private final TransferDialog dialog;
 
     public TransferButtonClickProcessor(TransferDialog dialog) {
@@ -35,7 +35,7 @@ public final class TransferButtonClickProcessor extends EventProcessor<TransferB
                 entityManager.getComponent(gameEntity, SelectedTerritoriesStack.class);
         //   a. if not present
         if (territoriesStack.territories.size() < 1) {
-            gameError.set(Constants.AT_LEAST_ONE_TERRITORY_SELECTED);
+            gameError.set(AT_LEAST_ONE_TERRITORY_SELECTED);
             return;
         }
         final UUID selectedTerritory = territoriesStack.territories.pop();
@@ -53,7 +53,7 @@ public final class TransferButtonClickProcessor extends EventProcessor<TransferB
         final Player territoryOwner = entityManager.getComponent(selectedTerritory, Player.class);
 
         if (army.frozen || !currentPlayer.currentPlayer.equals(territoryOwner)) {
-            gameError.set(Constants.TRANSFER_FAILED);
+            gameError.set(TRANSFER_FAILED);
             return;
         }
 

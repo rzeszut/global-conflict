@@ -1,11 +1,15 @@
 package edu.globalconflict.processor;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import edu.globalconflict.component.Player;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.game.EndTurnAction;
+import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.EventProcessor;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -32,17 +36,33 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
         currentPlayerLabel.setColor(currentPlayer.currentPlayer.color);
         currentPlayerLabel.setText(currentPlayer.currentPlayer.name);
 
-        // TODO
-        // 3. unfreeze player territories (armies, actually)
+        int playerTerritories = 0;
+        final Set<Map.Entry<UUID, Army>> armedEntries =
+                entityManager.getEntitiesWithComponentsForType(Army.class);
+
+        for (Map.Entry<UUID, Army> entry : armedEntries) {
+            final UUID territoryEntity = entry.getKey();
+            final Army army = entry.getValue();
+            final Player owner = entityManager.getComponent(territoryEntity, Player.class);
+
+            // 3. unfreeze player territories (armies, actually)
+            if (currentPlayer.currentPlayer.equals(owner)) {
+                army.frozen = false;
+                ++playerTerritories;
+            }
+        }
 
         // 4. calculate available troops for player
         //   a. territories
-        //   b. completed continents
+        int troopsSpawn = Math.max(3, playerTerritories / 3);
+        //   b. TODO: completed continents
+
+        currentPlayer.currentPlayer.availableTroops += troopsSpawn;
 
         // 5. update available troops label
         availableTroopsLabel.setColor(currentPlayer.currentPlayer.color);
         availableTroopsLabel.setText("Available troops: " + currentPlayer.currentPlayer.availableTroops);
 
-        // 6. clear selected territories
+        // 6. TODO: clear selected territories
     }
 }

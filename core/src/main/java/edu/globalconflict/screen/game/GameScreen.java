@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
@@ -100,15 +98,17 @@ public final class GameScreen implements Screen {
         currentPlayerLabel = new Label("", MainAssets.skin);
         availableTroopsLabel = new Label("", MainAssets.skin);
 
-        final VerticalGroup vbox = new VerticalGroup();
-        vbox.addActor(currentPlayerLabel);
-        vbox.addActor(availableTroopsLabel);
-        vbox.setPosition(0, Constants.SCREEN_HEIGHT - 2 * 20);
-        vbox.align(Align.left | Align.top);
-        vbox.pad(10);
-        vbox.pack();
+        final Table table = new Table(MainAssets.skin);
+        table.add(currentPlayerLabel).width(200).height(20);
+        table.row();
+        table.add(availableTroopsLabel).width(200).height(20);
+        table.row();
+        table.setPosition(0, Constants.SCREEN_HEIGHT - 2 * 20 - 20);
+        table.pad(10);
+        table.pack();
+        table.setBackground("tableBg");
 
-        uiStage.addActor(vbox);
+        uiStage.addActor(table);
     }
 
     private void createButtonsUI() {
@@ -122,14 +122,15 @@ public final class GameScreen implements Screen {
         endTurnButton.addListener(new EndTurnActionListener(entityManager, uiStage));
 
         final Table table = new Table(MainAssets.skin);
-        table.add(attackButton).width(80);
+        table.add(attackButton).width(100);
         table.row();
-        table.add(transferButton).width(80).padTop(5);
+        table.add(transferButton).width(100).padTop(5);
         table.row();
-        table.add(endTurnButton).width(80).padTop(5);
+        table.add(endTurnButton).width(100).padTop(5);
         table.row();
         table.pad(5);
         table.pack();
+        table.setBackground("tableBg");
 
         uiStage.addActor(table);
     }

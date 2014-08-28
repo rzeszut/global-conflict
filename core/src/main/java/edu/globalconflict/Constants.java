@@ -66,4 +66,10 @@ public interface Constants {
     /* Error messages */
     String AT_LEAST_ONE_TERRITORY_SELECTED = "You have to select a territory";
     String TRANSFER_FAILED = "You cannot perform transfer on this territory";
+
+    String AT_LEAST_TWO_TERRITORIES_SELECTED = "You have to select at least two territories";
+    String TERRITORIES_ARE_NOT_NEIGHBORS = "You must select two neighboring territories";
+    String SAME_PLAYER_TERRITORIES = "You must choose other player's territory for attack";
+    String ATTACK_FROM_NOT_CURRENT_PLAYER = "You must attack from your territory";
+    String FROZEN_TERRITORY = "You cannot attack with this territory";
 }
