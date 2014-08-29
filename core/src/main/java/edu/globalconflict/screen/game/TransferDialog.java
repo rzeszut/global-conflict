@@ -1,9 +1,11 @@
 package edu.globalconflict.screen.game;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.component.game.TransferAction;
@@ -28,12 +30,26 @@ public final class TransferDialog extends Dialog {
         this.stage = stage;
         this.entityManager = entityManager;
 
+        // widgets
         final Label label = new Label("Select number of troops to transfer:", MainAssets.skin);
         slider = new Slider(0, 1, 1, false, MainAssets.skin);
-        // TODO: label showing currently chosen value
+        final Label currentValueLabel = new Label("0", MainAssets.skin);
 
-        getContentTable().add(label).row();
+        // callbacks
+        slider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                currentValueLabel.setText(String.valueOf((int) slider.getValue()));
+            }
+        });
+
+        // layout setup
+        getContentTable().row().colspan(2);
+        getContentTable().add(label);
+
+        getContentTable().row();
         getContentTable().add(slider).width(250);
+        getContentTable().add(currentValueLabel);
 
         button("OK", ButtonClicked.OK).button("Cancel", ButtonClicked.CANCEL);
 

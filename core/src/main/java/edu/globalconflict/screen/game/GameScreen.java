@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,6 +18,7 @@ import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.processor.*;
+import edu.globalconflict.util.Ortho2DCamera;
 
 /**
  * @author mateusz
@@ -31,7 +31,7 @@ public final class GameScreen implements Screen {
 
     private EntityManager entityManager;
     private Engine engine;
-    private OrthographicCamera camera;
+    private Ortho2DCamera camera;
 
     @Override
     public void render(float delta) {
@@ -136,7 +136,10 @@ public final class GameScreen implements Screen {
     }
 
     private void createCamera() {
-        camera = new OrthographicCamera(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        camera = new Ortho2DCamera(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        camera.setAreaLimit(0, 0, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
+        camera.setZoomLimit(0.5f, 2.5f);
+
         camera.translate((Constants.WORLD_WIDTH - Constants.SCREEN_WIDTH) * 0.5f,
                 (Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT) * 0.5f);
         camera.update();

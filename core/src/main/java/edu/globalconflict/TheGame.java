@@ -47,8 +47,11 @@ public final class TheGame extends Game {
         setScreen(loadingGameScreen);
     }
 
-    public void goToGame(EntityManager entityManager) {
+    public void startGame(EntityManager entityManager) {
         gameScreen.setEntityManager(entityManager);
         setScreen(gameScreen);
     }
+
+    // TODO: pause game screen
+    // resumeGame() method -- move logic from GameScreen#show() to some method initialize(), called only fro mstartGame()
 }

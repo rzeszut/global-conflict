@@ -75,7 +75,7 @@ public final class GameController extends GestureDetector {
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY) {
             camera.translate(-deltaX / 1.5f * camera.zoom,
-                    deltaY / 1.5f * camera.zoom, 0);
+                    deltaY / 1.5f * camera.zoom);
             return true;
         }
 

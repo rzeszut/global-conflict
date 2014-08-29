@@ -105,7 +105,7 @@ public final class LoadingGameScreen implements Screen {
 
         @Override
         public void run() {
-            game.goToGame(entityManager);
+            game.startGame(entityManager);
         }
     }
 }

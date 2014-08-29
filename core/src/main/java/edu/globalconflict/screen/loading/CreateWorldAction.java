@@ -49,6 +49,9 @@ public final class CreateWorldAction implements Runnable, Constants {
         assignTerritoriesToPlayers(players);
 
         // TODO: get rid of this beginning action
+        // proposition: leave this as it is, but instead in GameScreen create initializeLabels() method
+        // that method will set labels only inf current player is present (that is, only when game is loaded)
+
         // END TURN action at the beginning of the game sets some labels, adds troops and so on.
         // This is pretty much required setup.
         final EndTurnAction endTurnAction = new EndTurnAction();
