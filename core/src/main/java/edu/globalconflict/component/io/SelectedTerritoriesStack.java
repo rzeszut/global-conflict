@@ -12,5 +12,5 @@ import java.util.UUID;
  * @since 17.08.14
  */
 public final class SelectedTerritoriesStack implements Component {
-    public Stack<UUID> territories = new Stack<>(42);
+    public Stack<UUID> territories = new Stack<>();
 }

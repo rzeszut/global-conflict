@@ -9,8 +9,14 @@ import java.util.Iterator;
  * @since 17.08.14
  */
 public final class Stack<T> implements Iterable<T> {
+    private static final int RESIZE_STEP = 8;
+
     private Object[] elements;
     private int size = 0;
+
+    public Stack() {
+        this(RESIZE_STEP);
+    }
 
     public Stack(int capacity) {
         elements = new Object[capacity];
@@ -33,13 +39,28 @@ public final class Stack<T> implements Iterable<T> {
     }
 
     public boolean push(T element) {
-        if (element == null || size == elements.length) {
-            // TODO: add automatic resizing
+        if (element == null) {
             return false;
-        } else {
-            elements[size++] = element;
-            return true;
         }
+
+        if (size == elements.length && !resize(size + RESIZE_STEP)) {
+            return false;
+        }
+
+        elements[size++] = element;
+        return true;
+    }
+
+    public boolean resize(int newCapacity) {
+        if (newCapacity <= elements.length) {
+            return false;
+        }
+
+        Object[] newArray = new Object[newCapacity];
+        System.arraycopy(elements, 0, newArray, 0, size);
+        elements = newArray;
+
+        return true;
     }
 
     public void clear() {

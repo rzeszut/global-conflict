@@ -84,6 +84,22 @@ public class StackTest {
         final boolean pushed = stack.push("qwerty");
 
         // then
+        assertTrue(pushed);
+        assertEquals(3, stack.size());
+        assertEquals(10, stack.capacity());
+    }
+
+    @Test
+    public void testPush_nullElement() {
+        // given
+        final Stack<String> stack = new Stack<>();
+        stack.push("elem1");
+        stack.push("elem2");
+
+        // when
+        final boolean pushed = stack.push(null);
+
+        // then
         assertFalse(pushed);
         assertEquals(2, stack.size());
     }
