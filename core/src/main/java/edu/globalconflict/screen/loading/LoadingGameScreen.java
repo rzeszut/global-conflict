@@ -44,7 +44,6 @@ public final class LoadingGameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().setWorldSize(width, height);
     }
 
     @Override

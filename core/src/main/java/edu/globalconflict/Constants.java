@@ -25,7 +25,6 @@ public interface Constants {
     boolean DEBUG = false;
 
     /* Player data */
-    int MAX_PLAYERS = 6;
     List<Color> PLAYER_COLORS = Arrays.asList(
             Color.RED,
             Color.GREEN,

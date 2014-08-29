@@ -10,6 +10,7 @@ public class DesktopLauncher {
         config.width = (int) Constants.SCREEN_WIDTH;
         config.height = (int) Constants.SCREEN_HEIGHT;
         config.title = "Global Conflict";
+        config.resizable = false;
 
         new LwjglApplication(new TheGame(), config);
     }

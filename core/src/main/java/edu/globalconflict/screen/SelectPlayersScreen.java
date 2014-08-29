@@ -13,8 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
@@ -55,7 +54,7 @@ public final class SelectPlayersScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ScalingViewport(Scaling.none, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        stage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         // widgets

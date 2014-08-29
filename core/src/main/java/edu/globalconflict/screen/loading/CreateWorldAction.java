@@ -37,6 +37,7 @@ public final class CreateWorldAction implements Runnable, Constants {
 
     @Override
     public void run() {
+        // TODO: create sea connection images
         constructNorthAmerica();
         constructSouthAmerica();
         constructEurope();

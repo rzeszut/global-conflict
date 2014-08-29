@@ -37,9 +37,11 @@ public final class AttackActionProcessor extends EventProcessor<AttackAction> {
 
             // each side rolls a dice
             final int defenderRoll = rnd.nextInt(6);
-            final int attackerRoll = rnd.nextInt(6);
+            // attacker chooses best one of two rolls
+            final int attackerRoll = Math.max(rnd.nextInt(6), rnd.nextInt(6));
 
             // decide who won this fight and kill some soldiers
+            // defender wins on equal rolls
             if (attackerRoll > defenderRoll) {
                 --defendingArmy.troops;
             } else {

@@ -140,8 +140,11 @@ public final class GameScreen implements Screen {
         camera.setAreaLimit(0, 0, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
         camera.setZoomLimit(0.5f, 2.5f);
 
+        // default zoom and position
+        camera.zoom = 1.5f;
         camera.translate((Constants.WORLD_WIDTH - Constants.SCREEN_WIDTH) * 0.5f,
                 (Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT) * 0.5f);
+
         camera.update();
     }
 

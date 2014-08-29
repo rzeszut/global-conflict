@@ -5,11 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
@@ -37,16 +37,15 @@ public final class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-//        stage.getViewport().setWorldSize(width, height);
     }
 
     @Override
     public void show() {
-        // TODO: test all Scaling modes
-        stage = new Stage(new ScalingViewport(Scaling.none, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        stage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         // widgets
+        final Image logo = new Image(MainAssets.logo);
         final TextButton startGameButton = new TextButton("Start game", MainAssets.skin);
         final TextButton exitButton = new TextButton("Exit", MainAssets.skin);
 
@@ -66,6 +65,8 @@ public final class MainMenuScreen implements Screen {
 
         // layout
         final Table table = new Table(MainAssets.skin);
+        table.add(logo).padBottom(80);
+        table.row();
         table.add(startGameButton).width(150).height(50);
         table.row();
         table.add(exitButton).width(150).height(50).padTop(10);
