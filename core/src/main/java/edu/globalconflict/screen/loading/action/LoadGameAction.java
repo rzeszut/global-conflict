@@ -27,7 +27,10 @@ public final class LoadGameAction implements GameCreateAction {
 
     @Override
     public void run() {
-        entityManager = GameSerializer.load("savefile.json");
+        entityManager = GameSerializer.load(Constants.SAVE_FILE);
+        if (entityManager == null) {
+            return;
+        }
 
         // add missing components for territories
         for (UUID territory : entityManager.getEntitiesForType(Territory.class)) {

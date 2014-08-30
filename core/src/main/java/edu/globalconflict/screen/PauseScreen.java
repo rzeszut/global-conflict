@@ -64,7 +64,7 @@ public final class PauseScreen implements Screen {
         saveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameSerializer.save(entityManager, "savefile.json");
+                GameSerializer.save(entityManager, Constants.SAVE_FILE);
                 dialog.show(stage, null);
             }
         });

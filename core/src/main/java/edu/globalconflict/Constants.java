@@ -87,4 +87,7 @@ public interface Constants {
     String SAME_PLAYER_TERRITORIES = "You must choose other player's territory for attack";
     String ATTACK_FROM_NOT_CURRENT_PLAYER = "You must attack from your territory";
     String FROZEN_TERRITORY = "You cannot attack with this territory";
+
+    /* Save file name */
+    String SAVE_FILE = ".savefile.json";
 }

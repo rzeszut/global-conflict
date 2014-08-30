@@ -45,13 +45,6 @@ public final class EntityBuilder {
         return this;
     }
 
-    // TODO: don't use this
-    public EntityBuilder withTexture(TextureAtlas.AtlasRegion region) {
-        manager.addComponent(entity, new Texture(region));
-        manager.addComponent(entity, new Size(region.getRegionWidth(), region.getRegionHeight()));
-        return this;
-    }
-
     /**
      * This method relies on the fact that {@link GameAssets} are loaded.
      * NEVER call this before {@link GameAssets#load()}.
@@ -61,7 +54,9 @@ public final class EntityBuilder {
      */
     public EntityBuilder withTexture(String regionName) {
         final TextureAtlas.AtlasRegion region = GameAssets.world.findRegion(regionName);
-        return withTexture(region);
+        manager.addComponent(entity, new Texture(region));
+        manager.addComponent(entity, new Size(region.getRegionWidth(), region.getRegionHeight()));
+        return this;
     }
 
     public EntityBuilder withPosition(float x, float y) {

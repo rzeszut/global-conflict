@@ -1,6 +1,7 @@
 package edu.globalconflict.screen.loading.action;
 
 import edu.globalconflict.TheGame;
+import edu.globalconflict.entity.EntityManager;
 
 /**
  * @author mateusz
@@ -17,6 +18,12 @@ public final class StartGameAction implements Runnable {
 
     @Override
     public void run() {
-        game.startGame(gameCreateAction.getEntityManager());
+        final EntityManager entityManager = gameCreateAction.getEntityManager();
+        if (entityManager == null ){
+            // TODO: show some message -- possibly refactor PauseScreen#InfoDialog
+            game.goToMainMenu();
+        } else {
+            game.startGame(entityManager);
+        }
     }
 }

@@ -2,8 +2,10 @@ package edu.globalconflict.serializer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.SerializationException;
 import edu.globalconflict.component.*;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.territory.Army;
@@ -49,7 +51,11 @@ public final class GameSerializer {
     }
 
     public static EntityManager load(String filename) {
-        final FileHandle file = Gdx.files.local(filename);
-        return json.fromJson(EntityManager.class, file);
+        try {
+            final FileHandle file = Gdx.files.local(filename);
+            return json.fromJson(EntityManager.class, file);
+        } catch (SerializationException | GdxRuntimeException e) {
+            return null;
+        }
     }
 }
