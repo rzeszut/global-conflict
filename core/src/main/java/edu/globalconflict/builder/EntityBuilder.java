@@ -1,8 +1,9 @@
 package edu.globalconflict.builder;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import edu.globalconflict.Constants;
+import edu.globalconflict.GameAssets;
 import edu.globalconflict.component.Continent;
 import edu.globalconflict.component.Position;
 import edu.globalconflict.component.Size;
@@ -44,10 +45,23 @@ public final class EntityBuilder {
         return this;
     }
 
-    public EntityBuilder withTexture(TextureRegion region) {
+    // TODO: don't use this
+    public EntityBuilder withTexture(TextureAtlas.AtlasRegion region) {
         manager.addComponent(entity, new Texture(region));
         manager.addComponent(entity, new Size(region.getRegionWidth(), region.getRegionHeight()));
         return this;
+    }
+
+    /**
+     * This method relies on the fact that {@link GameAssets} are loaded.
+     * NEVER call this before {@link GameAssets#load()}.
+     *
+     * @param regionName Region name
+     * @return Builder
+     */
+    public EntityBuilder withTexture(String regionName) {
+        final TextureAtlas.AtlasRegion region = GameAssets.world.findRegion(regionName);
+        return withTexture(region);
     }
 
     public EntityBuilder withPosition(float x, float y) {

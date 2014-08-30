@@ -1,6 +1,6 @@
 package edu.globalconflict.component;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.globalconflict.entity.Component;
 
 /**
@@ -10,9 +10,9 @@ import edu.globalconflict.entity.Component;
  * @since 15.08.14
  */
 public final class Texture implements Component {
-    public TextureRegion region;
+    public TextureAtlas.AtlasRegion region;
 
-    public Texture(TextureRegion region) {
+    public Texture(TextureAtlas.AtlasRegion region) {
         this.region = region;
     }
 }

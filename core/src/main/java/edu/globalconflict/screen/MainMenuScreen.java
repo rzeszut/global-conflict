@@ -47,6 +47,7 @@ public final class MainMenuScreen implements Screen {
         // widgets
         final Image logo = new Image(MainAssets.logo);
         final TextButton startGameButton = new TextButton("Start game", MainAssets.skin);
+        final TextButton loadGameButton = new TextButton("Load game", MainAssets.skin);
         final TextButton exitButton = new TextButton("Exit", MainAssets.skin);
 
         // callbacks
@@ -54,6 +55,12 @@ public final class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.goToPlayerSelection();
+            }
+        });
+        loadGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.goToLoadingSavedGame();
             }
         });
         exitButton.addListener(new ClickListener() {
@@ -68,6 +75,8 @@ public final class MainMenuScreen implements Screen {
         table.add(logo).padBottom(80);
         table.row();
         table.add(startGameButton).width(150).height(50);
+        table.row();
+        table.add(loadGameButton).width(150).height(50).padTop(10);
         table.row();
         table.add(exitButton).width(150).height(50).padTop(10);
         table.setFillParent(true);

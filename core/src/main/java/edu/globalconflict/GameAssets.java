@@ -3,62 +3,61 @@ package edu.globalconflict;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author mateusz
  * @since 11.08.14
  */
 public final class GameAssets {
-    private static TextureAtlas world;
+    public static TextureAtlas world;
 
-    public static TextureRegion alaska;
-    public static TextureRegion northwestTerritory;
-    public static TextureRegion alberta;
-    public static TextureRegion ontario;
-    public static TextureRegion quebec;
-    public static TextureRegion easternUS;
-    public static TextureRegion westernUS;
-    public static TextureRegion centralAmerica;
-    public static TextureRegion greenland;
+    public static TextureAtlas.AtlasRegion alaska;
+    public static TextureAtlas.AtlasRegion northwestTerritory;
+    public static TextureAtlas.AtlasRegion alberta;
+    public static TextureAtlas.AtlasRegion ontario;
+    public static TextureAtlas.AtlasRegion quebec;
+    public static TextureAtlas.AtlasRegion easternUS;
+    public static TextureAtlas.AtlasRegion westernUS;
+    public static TextureAtlas.AtlasRegion centralAmerica;
+    public static TextureAtlas.AtlasRegion greenland;
 
-    public static TextureRegion venezuela;
-    public static TextureRegion brazil;
-    public static TextureRegion peru;
-    public static TextureRegion argentina;
+    public static TextureAtlas.AtlasRegion venezuela;
+    public static TextureAtlas.AtlasRegion brazil;
+    public static TextureAtlas.AtlasRegion peru;
+    public static TextureAtlas.AtlasRegion argentina;
 
-    public static TextureRegion madagascar;
-    public static TextureRegion southAfrica;
-    public static TextureRegion congo;
-    public static TextureRegion eastAfrica;
-    public static TextureRegion northAfrica;
-    public static TextureRegion egypt;
+    public static TextureAtlas.AtlasRegion madagascar;
+    public static TextureAtlas.AtlasRegion southAfrica;
+    public static TextureAtlas.AtlasRegion congo;
+    public static TextureAtlas.AtlasRegion eastAfrica;
+    public static TextureAtlas.AtlasRegion northAfrica;
+    public static TextureAtlas.AtlasRegion egypt;
 
-    public static TextureRegion iceland;
-    public static TextureRegion greatBritain;
-    public static TextureRegion westernEurope;
-    public static TextureRegion southernEurope;
-    public static TextureRegion northernEurope;
-    public static TextureRegion scandinavia;
-    public static TextureRegion ukraine;
+    public static TextureAtlas.AtlasRegion iceland;
+    public static TextureAtlas.AtlasRegion greatBritain;
+    public static TextureAtlas.AtlasRegion westernEurope;
+    public static TextureAtlas.AtlasRegion southernEurope;
+    public static TextureAtlas.AtlasRegion northernEurope;
+    public static TextureAtlas.AtlasRegion scandinavia;
+    public static TextureAtlas.AtlasRegion ukraine;
 
-    public static TextureRegion westernAustralia;
-    public static TextureRegion easternAustralia;
-    public static TextureRegion newGuinea;
-    public static TextureRegion indonesia;
+    public static TextureAtlas.AtlasRegion westernAustralia;
+    public static TextureAtlas.AtlasRegion easternAustralia;
+    public static TextureAtlas.AtlasRegion newGuinea;
+    public static TextureAtlas.AtlasRegion indonesia;
 
-    public static TextureRegion middleEast;
-    public static TextureRegion india;
-    public static TextureRegion afghanistan;
-    public static TextureRegion siam;
-    public static TextureRegion china;
-    public static TextureRegion japan;
-    public static TextureRegion mongolia;
-    public static TextureRegion ural;
-    public static TextureRegion siberia;
-    public static TextureRegion irkutsk;
-    public static TextureRegion yakutsk;
-    public static TextureRegion kamchatka;
+    public static TextureAtlas.AtlasRegion middleEast;
+    public static TextureAtlas.AtlasRegion india;
+    public static TextureAtlas.AtlasRegion afghanistan;
+    public static TextureAtlas.AtlasRegion siam;
+    public static TextureAtlas.AtlasRegion china;
+    public static TextureAtlas.AtlasRegion japan;
+    public static TextureAtlas.AtlasRegion mongolia;
+    public static TextureAtlas.AtlasRegion ural;
+    public static TextureAtlas.AtlasRegion siberia;
+    public static TextureAtlas.AtlasRegion irkutsk;
+    public static TextureAtlas.AtlasRegion yakutsk;
+    public static TextureAtlas.AtlasRegion kamchatka;
 
     public static BitmapFont armyFont;
 
@@ -95,6 +94,7 @@ public final class GameAssets {
             northernEurope = world.findRegion("northern-europe");
             scandinavia = world.findRegion("scandinavia");
             ukraine = world.findRegion("ukraine");
+            System.out.println(world.findRegion("ukraine").name);
 
             westernAustralia = world.findRegion("western-australia");
             easternAustralia = world.findRegion("eastern-australia");

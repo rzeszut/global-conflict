@@ -11,6 +11,7 @@ import java.util.Iterator;
 public final class CycleIterator<T> implements Iterator<T> {
     private Iterable<T> iterable;
     private Iterator<T> iterator;
+    private int count = 0;
 
     public CycleIterator(Iterable<T> iterable) {
         this.iterable = iterable;
@@ -27,11 +28,16 @@ public final class CycleIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
+        ++count;
         return iterator.next();
     }
 
     @Override
     public void remove() {
         iterator.remove();
+    }
+
+    public int getCallCount() {
+        return count;
     }
 }

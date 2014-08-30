@@ -12,11 +12,4 @@ import edu.globalconflict.entity.Component;
  */
 public final class TintColor implements Component {
     public Color color = Color.WHITE.cpy();
-
-    public TintColor() {
-    }
-
-    public TintColor(Color color) {
-        this.color.set(color);
-    }
 }

@@ -14,7 +14,7 @@ public final class TerritoryBounds implements Component {
      * An array of vertices in format [x1, y1, x2, y2, ...], where x* and y* are in entity's local coordinates,
      * not world coordinates.
      */
-    public float[] bounds;
+    public final float[] bounds;
 
     public TerritoryBounds(float[] bounds) {
         this.bounds = bounds;

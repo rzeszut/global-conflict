@@ -7,8 +7,7 @@ import edu.globalconflict.entity.Component;
  * @since 28.08.14
  */
 public final class PolygonCentroid implements Component {
-    public final float x;
-    public final float y;
+    public final float x, y;
 
     public PolygonCentroid(float x, float y) {
         this.x = x;

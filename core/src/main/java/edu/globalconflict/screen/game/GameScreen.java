@@ -5,20 +5,27 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
+import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.io.AttackButtonClick;
 import edu.globalconflict.component.io.TransferButtonClick;
 import edu.globalconflict.controller.GameController;
 import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
+import edu.globalconflict.entity.Tag;
 import edu.globalconflict.processor.*;
+import edu.globalconflict.serializer.GameSerializer;
 import edu.globalconflict.util.Ortho2DCamera;
+
+import java.util.UUID;
 
 /**
  * @author mateusz
@@ -60,6 +67,7 @@ public final class GameScreen implements Screen {
         uiStage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         createButtonsUI();
         createLabelsUI();
+        createMenuUI();
 
         final TransferDialog transferDialog = new TransferDialog(uiStage, entityManager);
         final ErrorDialog errorDialog = new ErrorDialog(uiStage);
@@ -98,6 +106,15 @@ public final class GameScreen implements Screen {
         currentPlayerLabel = new Label("", MainAssets.skin);
         availableTroopsLabel = new AvailableTroopsLabel();
 
+        // update labels with valid values, if possible
+        final UUID gameEntity = entityManager.getEntityForTag(Tag.Namespace.GAME, Constants.GAME_ENTITY);
+        final CurrentPlayer currentPlayer = entityManager.getComponent(gameEntity, CurrentPlayer.class);
+        if (currentPlayer.currentPlayer != null) {
+            currentPlayerLabel.setColor(currentPlayer.currentPlayer.color);
+            currentPlayerLabel.setText(currentPlayer.currentPlayer.name);
+            availableTroopsLabel.update(currentPlayer);
+        }
+
         final Table table = new Table(MainAssets.skin);
         table.add(currentPlayerLabel).width(200).height(20);
         table.row();
@@ -129,6 +146,26 @@ public final class GameScreen implements Screen {
         table.add(endTurnButton).width(100).padTop(5);
         table.row();
         table.pad(5);
+        table.pack();
+        table.setBackground("tableBg");
+
+        uiStage.addActor(table);
+    }
+
+    private void createMenuUI() {
+        final TextButton button = new TextButton("X", MainAssets.skin);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                // TODO: implement some pause screen and menu: return, save, exit to main menu
+                GameSerializer.save(entityManager, "savefile.json");
+            }
+        });
+
+        final Table table = new Table(MainAssets.skin);
+        table.row().pad(10);
+        table.add(button).width(30).height(30);
+        table.setPosition(Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 50);
         table.pack();
         table.setBackground("tableBg");
 

@@ -37,6 +37,8 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
         final CurrentPlayer currentPlayer = entityManager.getComponent(gameEntity, CurrentPlayer.class);
         currentPlayer.nextPlayer();
 
+        // TODO: win/lose conditions
+
         // 2. update current player label
         currentPlayerLabel.setColor(currentPlayer.currentPlayer.color);
         currentPlayerLabel.setText(currentPlayer.currentPlayer.name);

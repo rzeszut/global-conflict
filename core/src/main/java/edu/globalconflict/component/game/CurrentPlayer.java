@@ -4,7 +4,7 @@ import edu.globalconflict.component.Player;
 import edu.globalconflict.entity.Component;
 import edu.globalconflict.util.CycleIterator;
 
-import java.util.Iterator;
+import java.util.Collection;
 
 /**
  * Component representing current player.
@@ -13,16 +13,18 @@ import java.util.Iterator;
  * @since 22.08.14
  */
 public final class CurrentPlayer implements Component {
-    private Iterator<Player> playerIterator;
+    public final Collection<Player> players;
+    public final CycleIterator<Player> playerIterator;
     /**
      * Current player.
      * Note that at the beginning this value is null: mock PlayerAction END TURN should be fired at the very beginning
      * of the game.
      */
-    public Player currentPlayer;
+    public Player currentPlayer = null;
 
-    public CurrentPlayer(Iterable<Player> players) {
+    public CurrentPlayer(Collection<Player> players) {
         this.playerIterator = new CycleIterator<>(players);
+        this.players = players;
     }
 
     /**

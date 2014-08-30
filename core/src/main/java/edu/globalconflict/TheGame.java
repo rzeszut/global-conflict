@@ -6,14 +6,16 @@ import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.screen.MainMenuScreen;
 import edu.globalconflict.screen.SelectPlayersScreen;
 import edu.globalconflict.screen.game.GameScreen;
-import edu.globalconflict.screen.loading.LoadingGameScreen;
+import edu.globalconflict.screen.loading.LoadingNewGameScreen;
+import edu.globalconflict.screen.loading.LoadingSavedGameScreen;
 
 import java.util.List;
 
 public final class TheGame extends Game {
     private MainMenuScreen mainMenuScreen;
     private SelectPlayersScreen selectPlayersScreen;
-    private LoadingGameScreen loadingGameScreen;
+    private LoadingNewGameScreen loadingNewGameScreen;
+    private LoadingSavedGameScreen loadingSavedGameScreen;
     private GameScreen gameScreen;
 
     @Override
@@ -22,7 +24,8 @@ public final class TheGame extends Game {
 
         mainMenuScreen = new MainMenuScreen(this);
         selectPlayersScreen = new SelectPlayersScreen(this);
-        loadingGameScreen = new LoadingGameScreen(this);
+        loadingNewGameScreen = new LoadingNewGameScreen(this);
+        loadingSavedGameScreen = new LoadingSavedGameScreen(this);
         gameScreen = new GameScreen();
 
         setScreen(mainMenuScreen);
@@ -42,9 +45,13 @@ public final class TheGame extends Game {
         setScreen(selectPlayersScreen);
     }
 
-    public void goToLoadingScreen(List<String> playerNames) {
-        loadingGameScreen.setPlayerNames(playerNames);
-        setScreen(loadingGameScreen);
+    public void goToLoadingNewGame(List<String> playerNames) {
+        loadingNewGameScreen.setPlayerNames(playerNames);
+        setScreen(loadingNewGameScreen);
+    }
+
+    public void goToLoadingSavedGame() {
+        setScreen(loadingSavedGameScreen);
     }
 
     public void startGame(EntityManager entityManager) {

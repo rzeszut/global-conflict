@@ -7,8 +7,8 @@ import java.util.*;
  * @since 15.08.14
  */
 public final class EntityManager {
-    private Map<Class<? extends Component>, Map<UUID, ? extends Component>> componentMap;
-    private Map<Tag, UUID> tagsToEntities;
+    public Map<Class<? extends Component>, Map<UUID, ? extends Component>> componentMap;
+    public Map<Tag, UUID> tagsToEntities;
 
     private Tag tmpTag = new Tag();
 

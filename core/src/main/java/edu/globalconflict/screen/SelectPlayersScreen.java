@@ -93,7 +93,7 @@ public final class SelectPlayersScreen implements Screen {
         okButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.goToLoadingScreen(getPlayerNames());
+                game.goToLoadingNewGame(getPlayerNames());
             }
         });
         cancelButton.addListener(new ClickListener() {

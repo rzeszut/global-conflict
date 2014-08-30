@@ -1,4 +1,4 @@
-package edu.globalconflict.screen.loading;
+package edu.globalconflict.screen.loading.action;
 
 import com.badlogic.gdx.graphics.Color;
 import edu.globalconflict.Constants;
@@ -23,15 +23,15 @@ import java.util.*;
  * @author mateusz
  * @since 15.08.14
  */
-public final class CreateWorldAction implements Runnable, Constants {
+public final class NewGameAction implements Constants, GameCreateAction {
     private final EntityManager entityManager;
     private final EntityBuilder entityBuilder;
 
     private final List<String> playerNames;
 
-    public CreateWorldAction(EntityManager entityManager, List<String> playerNames) {
-        this.entityManager = entityManager;
-        this.entityBuilder = new EntityBuilder(entityManager);
+    public NewGameAction(List<String> playerNames) {
+        this.entityManager = new EntityManager();
+        this.entityBuilder = new EntityBuilder(this.entityManager);
         this.playerNames = playerNames;
     }
 
@@ -48,10 +48,6 @@ public final class CreateWorldAction implements Runnable, Constants {
 
         final List<Player> players = createPlayers();
         assignTerritoriesToPlayers(players);
-
-        // TODO: get rid of this beginning action
-        // proposition: leave this as it is, but instead in GameScreen create initializeLabels() method
-        // that method will set labels only inf current player is present (that is, only when game is loaded)
 
         // END TURN action at the beginning of the game sets some labels, adds troops and so on.
         // This is pretty much required setup.
@@ -431,5 +427,10 @@ public final class CreateWorldAction implements Runnable, Constants {
                 .withTexture(GameAssets.greenland)
                 .withPosition(914, 208)
                 .withBounds(1, 40, 106, 9, 388, 12, 292, 118, 99, 207, 56, 179, 90, 117, 60, 57);
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }

@@ -117,5 +117,10 @@ public final class Stack<T> implements Iterable<T> {
         public T next() {
             return (T) Stack.this.elements[--currentIndex];
         }
+
+        @Override
+        public void remove() {
+            // TODO
+        }
     }
 }

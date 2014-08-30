@@ -11,9 +11,8 @@ import edu.globalconflict.Constants;
 import edu.globalconflict.GameAssets;
 import edu.globalconflict.MainAssets;
 import edu.globalconflict.TheGame;
-import edu.globalconflict.entity.EntityManager;
-
-import java.util.List;
+import edu.globalconflict.screen.loading.action.GameCreateAction;
+import edu.globalconflict.screen.loading.action.StartGameAction;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -21,13 +20,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  * @author mateusz
  * @since 11.08.14
  */
-public final class LoadingGameScreen implements Screen {
+public abstract class LoadingGameScreen implements Screen {
     private static final float FADE_DELAY = 0.25f;
 
     private TheGame game;
     private Stage stage;
-
-    private List<String> playerNames;
 
     public LoadingGameScreen(TheGame game) {
         this.game = game;
@@ -55,17 +52,19 @@ public final class LoadingGameScreen implements Screen {
         container.center();
         container.setFillParent(true);
 
-        final EntityManager entityManager = new EntityManager();
+        final GameCreateAction gameCreateAction = getGameCreateAction();
 
         stage.addActor(container);
         stage.addAction(sequence(
                 fadeIn(FADE_DELAY),
                 run(new LoadGameAssetsAction()),
-                run(new CreateWorldAction(entityManager, playerNames)),
+                run(gameCreateAction),
                 fadeOut(FADE_DELAY),
-                run(new StartGameAction(entityManager))
+                run(new StartGameAction(game, gameCreateAction))
         ));
     }
+
+    protected abstract GameCreateAction getGameCreateAction();
 
     @Override
     public void hide() {
@@ -84,27 +83,10 @@ public final class LoadingGameScreen implements Screen {
         stage.dispose();
     }
 
-    public void setPlayerNames(List<String> playerNames) {
-        this.playerNames = playerNames;
-    }
-
     private static final class LoadGameAssetsAction implements Runnable {
         @Override
         public void run() {
             GameAssets.load();
-        }
-    }
-
-    private final class StartGameAction implements Runnable {
-        private EntityManager entityManager;
-
-        private StartGameAction(EntityManager entityManager) {
-            this.entityManager = entityManager;
-        }
-
-        @Override
-        public void run() {
-            game.startGame(entityManager);
         }
     }
 }
