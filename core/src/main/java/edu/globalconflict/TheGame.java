@@ -4,6 +4,7 @@ package edu.globalconflict;
 import com.badlogic.gdx.Game;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.screen.MainMenuScreen;
+import edu.globalconflict.screen.PauseScreen;
 import edu.globalconflict.screen.SelectPlayersScreen;
 import edu.globalconflict.screen.game.GameScreen;
 import edu.globalconflict.screen.loading.LoadingNewGameScreen;
@@ -17,6 +18,7 @@ public final class TheGame extends Game {
     private LoadingNewGameScreen loadingNewGameScreen;
     private LoadingSavedGameScreen loadingSavedGameScreen;
     private GameScreen gameScreen;
+    private PauseScreen pauseScreen;
 
     @Override
     public void create() {
@@ -26,7 +28,8 @@ public final class TheGame extends Game {
         selectPlayersScreen = new SelectPlayersScreen(this);
         loadingNewGameScreen = new LoadingNewGameScreen(this);
         loadingSavedGameScreen = new LoadingSavedGameScreen(this);
-        gameScreen = new GameScreen();
+        gameScreen = new GameScreen(this);
+        pauseScreen = new PauseScreen(this);
 
         setScreen(mainMenuScreen);
     }
@@ -55,10 +58,16 @@ public final class TheGame extends Game {
     }
 
     public void startGame(EntityManager entityManager) {
-        gameScreen.setEntityManager(entityManager);
+        gameScreen.initialize(entityManager);
         setScreen(gameScreen);
     }
 
-    // TODO: pause game screen
-    // resumeGame() method -- move logic from GameScreen#show() to some method initialize(), called only fro mstartGame()
+    public void resumeGame() {
+        setScreen(gameScreen);
+    }
+
+    public void pauseGame(EntityManager entityManager) {
+        pauseScreen.setEntityManager(entityManager);
+        setScreen(pauseScreen);
+    }
 }

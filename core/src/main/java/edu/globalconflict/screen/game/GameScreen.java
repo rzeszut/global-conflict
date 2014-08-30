@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.globalconflict.Constants;
 import edu.globalconflict.MainAssets;
+import edu.globalconflict.TheGame;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.io.AttackButtonClick;
 import edu.globalconflict.component.io.TransferButtonClick;
@@ -22,7 +23,6 @@ import edu.globalconflict.entity.Engine;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.Tag;
 import edu.globalconflict.processor.*;
-import edu.globalconflict.serializer.GameSerializer;
 import edu.globalconflict.util.Ortho2DCamera;
 
 import java.util.UUID;
@@ -32,13 +32,19 @@ import java.util.UUID;
  * @since 10.08.14
  */
 public final class GameScreen implements Screen {
+    private TheGame game;
     private Stage uiStage;
     private Label currentPlayerLabel;
     private AvailableTroopsLabel availableTroopsLabel;
+    private InputProcessor inputProcessor;
 
     private EntityManager entityManager;
     private Engine engine;
     private Ortho2DCamera camera;
+
+    public GameScreen(TheGame game) {
+        this.game = game;
+    }
 
     @Override
     public void render(float delta) {
@@ -63,6 +69,30 @@ public final class GameScreen implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(inputProcessor);
+    }
+
+    @Override
+    public void hide() {
+        Gdx.input.setInputProcessor(null);
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void dispose() {
+        uiStage.dispose();
+    }
+
+    public void initialize(EntityManager entityManager) {
+        this.entityManager = entityManager;
+
         // Game UI
         uiStage = new Stage(new FitViewport(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         createButtonsUI();
@@ -98,8 +128,7 @@ public final class GameScreen implements Screen {
 
         // input controller
         final GameController controller = new GameController(camera, entityManager);
-        final InputProcessor inputProcessor = new InputMultiplexer(uiStage, controller);
-        Gdx.input.setInputProcessor(inputProcessor);
+        inputProcessor = new InputMultiplexer(uiStage, controller);
     }
 
     private void createLabelsUI() {
@@ -157,8 +186,7 @@ public final class GameScreen implements Screen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
-                // TODO: implement some pause screen and menu: return, save, exit to main menu
-                GameSerializer.save(entityManager, "savefile.json");
+                game.pauseGame(entityManager);
             }
         });
 
@@ -183,27 +211,5 @@ public final class GameScreen implements Screen {
                 (Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT) * 0.5f);
 
         camera.update();
-    }
-
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void dispose() {
-        uiStage.dispose();
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
     }
 }
