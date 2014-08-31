@@ -1,13 +1,11 @@
 package edu.globalconflict.builder;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import edu.globalconflict.Constants;
 import edu.globalconflict.GameAssets;
-import edu.globalconflict.component.Continent;
-import edu.globalconflict.component.Position;
-import edu.globalconflict.component.Size;
-import edu.globalconflict.component.Texture;
+import edu.globalconflict.component.*;
 import edu.globalconflict.component.territory.PolygonCentroid;
 import edu.globalconflict.component.territory.Territory;
 import edu.globalconflict.component.territory.TerritoryBounds;
@@ -94,6 +92,11 @@ public final class EntityBuilder {
 
     public EntityBuilder withContinent(int points, String... territories) {
         manager.addComponent(entity, new Continent(points, territories));
+        return this;
+    }
+
+    public EntityBuilder withTintColor(Color color) {
+        manager.addComponent(entity, new TintColor(color));
         return this;
     }
 }

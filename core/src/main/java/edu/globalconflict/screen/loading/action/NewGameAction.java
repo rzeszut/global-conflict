@@ -33,7 +33,8 @@ public final class NewGameAction implements Constants, GameCreateAction {
 
     @Override
     public void run() {
-        // TODO: create sea connection images
+        createSeaConnections();
+
         constructNorthAmerica();
         constructSouthAmerica();
         constructEurope();
@@ -66,6 +67,54 @@ public final class NewGameAction implements Constants, GameCreateAction {
                 .withComponent(endTurnAction)
                 .withComponent(new GameLost())
                 .withComponent(new CurrentPlayer(players));
+    }
+
+    private void createSeaConnections() {
+        entityBuilder
+                .newEntity()
+                .withTexture("con1")
+                .withPosition(606, 253)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con2")
+                .withPosition(2, 202)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con3")
+                .withPosition(967, 920)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con4")
+                .withPosition(1186, 272)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con5")
+                .withPosition(1442, 496)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con6")
+                .withPosition(1709, 1106)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con7")
+                .withPosition(2456, 1075)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con8")
+                .withPosition(2589, 450)
+                .withTintColor(Constants.CONNECTIONS_TINT)
+
+                .newEntity()
+                .withTexture("con9")
+                .withPosition(2780, 202)
+                .withTintColor(Constants.CONNECTIONS_TINT);
     }
 
     private List<Player> createPlayers() {

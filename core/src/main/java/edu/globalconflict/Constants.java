@@ -31,7 +31,7 @@ public interface Constants {
             Color.BLUE,
             Color.ORANGE,
             Color.MAGENTA,
-            Color.WHITE
+            Color.YELLOW
     );
 
     /* Territory names */
@@ -77,6 +77,9 @@ public interface Constants {
     String INDONESIA = "Indonesia";
     String NEW_GUINEA = "New Guinea";
     String WESTERN_AUSTRALIA = "Western Australia";
+
+    /* Connection images tint color */
+    Color CONNECTIONS_TINT = new Color(1, 1, 1, 0.4f);
 
     /* Error messages */
     String AT_LEAST_ONE_TERRITORY_SELECTED = "You have to select a territory";
