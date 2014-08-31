@@ -6,6 +6,7 @@ import edu.globalconflict.component.Player;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.game.EndTurnAction;
 import edu.globalconflict.component.game.GameLost;
+import edu.globalconflict.component.game.GameWon;
 import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
@@ -61,6 +62,12 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
         // 4. if player has 0 territories, that means he lost the game
         if (playerTerritories == 0) {
             entityManager.getComponent(gameEntity, GameLost.class).isNew = true;
+            return;
+        }
+
+        // 4.b if player has all (42) territories - he wins
+        if(playerTerritories == 42) {
+            entityManager.getComponent(gameEntity, GameWon.class).isNew = true;
             return;
         }
 

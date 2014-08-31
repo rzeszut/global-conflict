@@ -119,6 +119,7 @@ public final class GameScreen implements Screen {
         engine.registerProcessor(new TransferActionProcessor(availableTroopsLabel));
         engine.registerProcessor(new EndTurnActionProcessor(currentPlayerLabel, availableTroopsLabel));
         engine.registerProcessor(new GameLostProcessor());
+        engine.registerProcessor(new GameWonProcessor());
 
         // rendering
         engine.registerProcessor(new TextureRenderProcessor(camera));

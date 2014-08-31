@@ -92,6 +92,7 @@ public interface Constants {
     String FROZEN_TERRITORY = "You cannot attack with this territory";
 
     String GAME_LOST = "You lost the game";
+    String GAME_WON = "Congratulations, you won the game!";
 
     /* Save file name */
     String SAVE_FILE = ".savefile.json";

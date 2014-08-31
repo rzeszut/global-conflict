@@ -66,6 +66,7 @@ public final class NewGameAction implements Constants, GameCreateAction {
                 .withComponent(new TransferAction())
                 .withComponent(endTurnAction)
                 .withComponent(new GameLost())
+                .withComponent(new GameWon())
                 .withComponent(new CurrentPlayer(players));
     }
 
