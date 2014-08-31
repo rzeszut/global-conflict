@@ -88,6 +88,8 @@ public interface Constants {
     String ATTACK_FROM_NOT_CURRENT_PLAYER = "You must attack from your territory";
     String FROZEN_TERRITORY = "You cannot attack with this territory";
 
+    String GAME_LOST = "You lost the game";
+
     /* Save file name */
     String SAVE_FILE = ".savefile.json";
 }

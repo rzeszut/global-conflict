@@ -11,7 +11,7 @@ import java.util.UUID;
 public abstract class EventProcessor<C extends EventComponent> implements Processor {
     private final Class<C> eventComponentClass;
 
-    protected EventProcessor(Class<C> eventComponentClass) {
+    public EventProcessor(Class<C> eventComponentClass) {
         this.eventComponentClass = eventComponentClass;
     }
 

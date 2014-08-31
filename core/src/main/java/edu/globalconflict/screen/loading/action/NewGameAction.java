@@ -5,10 +5,7 @@ import edu.globalconflict.Constants;
 import edu.globalconflict.builder.EntityBuilder;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.TintColor;
-import edu.globalconflict.component.game.AttackAction;
-import edu.globalconflict.component.game.CurrentPlayer;
-import edu.globalconflict.component.game.EndTurnAction;
-import edu.globalconflict.component.game.TransferAction;
+import edu.globalconflict.component.game.*;
 import edu.globalconflict.component.io.*;
 import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.component.territory.Territory;
@@ -67,6 +64,7 @@ public final class NewGameAction implements Constants, GameCreateAction {
                 .withComponent(new AttackAction())
                 .withComponent(new TransferAction())
                 .withComponent(endTurnAction)
+                .withComponent(new GameLost())
                 .withComponent(new CurrentPlayer(players));
     }
 

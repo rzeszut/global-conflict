@@ -5,6 +5,7 @@ import edu.globalconflict.component.Continent;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.game.CurrentPlayer;
 import edu.globalconflict.component.game.EndTurnAction;
+import edu.globalconflict.component.game.GameLost;
 import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.component.territory.TerritorySelected;
 import edu.globalconflict.entity.EntityManager;
@@ -37,8 +38,6 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
         final CurrentPlayer currentPlayer = entityManager.getComponent(gameEntity, CurrentPlayer.class);
         currentPlayer.nextPlayer();
 
-        // TODO: win/lose conditions
-
         // 2. update current player label
         currentPlayerLabel.setColor(currentPlayer.currentPlayer.color);
         currentPlayerLabel.setText(currentPlayer.currentPlayer.name);
@@ -59,7 +58,13 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
             }
         }
 
-        // 4. calculate available troops for player
+        // 4. if player has 0 territories, that means he lost the game
+        if (playerTerritories == 0) {
+            entityManager.getComponent(gameEntity, GameLost.class).isNew = true;
+            return;
+        }
+
+        // 5. calculate available troops for player
         //   a. territories
         int troopsSpawn = Math.max(3, playerTerritories / 3);
 
@@ -74,10 +79,10 @@ public final class EndTurnActionProcessor extends EventProcessor<EndTurnAction> 
 
         currentPlayer.currentPlayer.availableTroops += troopsSpawn;
 
-        // 5. update available troops label
+        // 6. update available troops label
         availableTroopsLabel.update(currentPlayer);
 
-        // 6. clear selected territories
+        // 7. clear selected territories
         final Collection<TerritorySelected> selectedTerritories =
                 entityManager.getComponentsForType(TerritorySelected.class);
         for (TerritorySelected selectedTerritory : selectedTerritories) {
