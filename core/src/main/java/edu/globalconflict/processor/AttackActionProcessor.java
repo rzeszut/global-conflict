@@ -3,11 +3,15 @@ package edu.globalconflict.processor;
 import edu.globalconflict.component.Player;
 import edu.globalconflict.component.TintColor;
 import edu.globalconflict.component.game.AttackAction;
+import edu.globalconflict.component.game.CurrentPlayer;
+import edu.globalconflict.component.game.GameWon;
 import edu.globalconflict.component.territory.Army;
 import edu.globalconflict.entity.EntityManager;
 import edu.globalconflict.entity.EventProcessor;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -57,6 +61,31 @@ public final class AttackActionProcessor extends EventProcessor<AttackAction> {
 
             // transfer ownership of the territory, set color
             changeOwner(entityManager, event.attackingTerritory, event.defendingTerritory);
+
+            //check win condition
+            final CurrentPlayer currentPlayer = entityManager.getComponent(gameEntity, CurrentPlayer.class);
+
+            int playerTerritories = 0;
+            final Set<Map.Entry<UUID, Army>> armedEntries =
+                    entityManager.getEntitiesWithComponentsForType(Army.class);
+
+            for (Map.Entry<UUID, Army> entry : armedEntries) {
+                final UUID territoryEntity = entry.getKey();
+                final Army army = entry.getValue();
+                final Player owner = entityManager.getComponent(territoryEntity, Player.class);
+
+                // 3. unfreeze player territories (armies, actually)
+                if (currentPlayer.currentPlayer.equals(owner)) {
+                    army.frozen = false;
+                    ++playerTerritories;
+                }
+
+                if(playerTerritories == 42) {
+                    entityManager.getComponent(gameEntity, GameWon.class).isNew = true;
+                    return;
+                }
+
+            }
 
             // freeze newly won territory
             defendingArmy.frozen = true;
